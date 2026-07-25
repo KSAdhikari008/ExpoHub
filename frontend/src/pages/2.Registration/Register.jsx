@@ -1,8 +1,42 @@
 import { NavLink } from "react-router-dom";
 import heroImage from "./../../assets/registerHero3.jpg";
 import styles from "./Register.module.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Register() {
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: ''
+  });
+
+  useEffect(()=>{
+  
+    console.log(formData)
+  
+  });
+
+  function handleSubmit(){
+    
+  }
+
+  function handleInput(e){
+    switch(e.target.name){
+      case "name" : setFormData(prev => ({ ...prev, name: e.target.value}));
+        break;
+      case "email" : setFormData(prev => ({ ...prev, email: e.target.value}));
+        break;
+      case "password" : setFormData(prev => ({ ...prev, password: e.target.value}));
+        break;
+      case "role" : setFormData(prev => ({ ...prev, role: e.target.value}));
+        break;
+      default : console.log("somen went wrong!");
+    }    
+  }
+
   return (
     <div className={styles.registrationPage}>
       <div className={styles.header}>
@@ -29,16 +63,49 @@ function Register() {
               <h3 className="text-3xl font-medium  ">Welcome Back</h3>
               <p>Sign in to continue to your account</p>
             </div>
-            <form action="" method="POST" className={`${styles["registration-form"]} border-2 border-blue-400 basis-9/10 flex flex-col justify-center items-center w-8/10  `}>
-              <label htmlFor="email" className="text-left w-2/4 ">Enter Address</label>
+
+            <form onSubmit={handleSubmit}  
+                  className={`${styles["registration-form"]} border-2 border-blue-400 basis-9/10 flex flex-col justify-center items-center w-8/10  `}>
+              <label htmlFor="name" className="text-left w-2/4 ">Enter User name:
+              </label>
+              <input type="text" name="name" id="name"  required 
+                      onChange={handleInput}
+                      className="border rounded mt-2 mb-7 px-4 pb-1 h-1/12 w-2/4" />
+              <label htmlFor="email" className="text-left w-2/4 ">Enter Address
+              </label>
               <input type="email" name="email" id="email" placeholder="you@example.com" required 
-                      className="border rounded mt-2 mb-7 pl-7 pb-1 h-1/12 w-2/4" />
-              <label htmlFor="password" className="w-2/4 text-left">Password</label>
+                      onChange={handleInput}
+                      className="border rounded mt-2 mb-7 px-7 pb-1 h-1/12 w-2/4" />
+              <label htmlFor="password" className="w-2/4 text-left">Password
+              </label>
               <input type="password" name="password" id="password" placeholder="Enter your password" required 
-                      className="border rounded mt-2 mb-7 pl-7 pb-1 h-1/12 w-2/4" />
-              <input type="submit" value="Sign In" 
-                      className="border w-16 h-7 rounded"/>
+                      onChange={handleInput}
+                      className="border rounded mt-2 mb-7 px-7 pb-1 h-1/12 w-2/4" />
+              <label htmlFor="role" className="w-2/4 text-left">Role
+              </label>
+              <select name="role" id="role" value={formData.role} required 
+                      onChange={handleInput} 
+                      className="border rounded mt-2 mb-7 px-3 pb-1 h-1/12 w-2/4" >
+                <option value="" disabled >Select</option>
+                <option value="Visitor">Visitor</option>
+                <option value="Exhibitor">Exhibitor</option>
+                <option value="Admin">Admin</option>
+              </select>              
+              <button type="submit" value="Register" 
+                      className="border w-20 h-8 pb-1 rounded">Register</button>
             </form>
+              {/*Controlled vs Uncontrolled <select>
+              Uncontrolled (<select> without a value prop):
+              - The browser manages the selected option.
+              - If the first option is disabled, the browser skips it and selects the first enabled option.
+
+              Controlled (<select value={formData.role}>):
+              - React manages the selected option.
+              - React displays the option whose value matches formData.role.
+              - If formData.role === "", React displays the <option value=""> even if it's disabled.
+              - The disabled attribute only prevents the user from selecting that option after the initial render; it does not stop React from displaying it as the current value.
+
+              This is the standard way to create a placeholder for a controlled <select>.*/}
           </div>
         </div>
       </div>
