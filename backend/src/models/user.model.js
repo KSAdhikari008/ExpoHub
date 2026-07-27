@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["Visitor", "Exhibitor", "Admin"],
         dafault: "Visitor"
+    },
+    profileImage: {
+        url: String,
+        fileId: String
     }
 });
 

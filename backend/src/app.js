@@ -2,7 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv/config';
+import multer from 'multer'
 import { User } from './models/user.model.js';
+import { Booth } from './models/booth.model.js';
+import { uploadFile } from './utils/imageKit.js';
+import { Event } from './models/event.model.js';
 const app = express();
 
 // Middleware configurations.
@@ -11,10 +15,13 @@ app.use(express.static("public")); // public folder available on request.
 app.use(express.json({limit: "20kb"}));
 app.use(cors({origin: `${process.env.CORS_ORIGIN}`}));
 app.use(cookieParser());
+const upload = multer({storage: multer.memoryStorage()}); // multer stores the uploaded file temporarily in RAM instead of saving it to your server's disk.
 
+
+// USER 
 app.get('/user', async (req,res)=>{
     const user = await User.find();
-    
+   
     res.status(200).json({
         message: "User fetched",
         user: user
@@ -47,5 +54,66 @@ app.patch('/user/:id', async (req,res)=>{
 })
 
 
+//BOOTH
+app.get('/api/booths', async (req,res)=>{
+    const booths = await Booth.find();
+    res.status(200).json({
+        message: "booths fetched",
+        booths: booths
+    })
+})
+
+app.post('/api/booths',upload.single('poster'), async (req,res)=>{
+    const result = await uploadFile(req.file.buffer, req.body.filename);
+    console.log(result);
+    await Booth.create({
+        boothName: req.body.boothName,
+        boothNumber: req.body.boothNumber,
+        discription: req.body.discription,
+        size: req.body.size,
+        poster: {
+            url: result.url,
+            fileId: result.fileId
+        },
+        status: req.body.status,
+        event: req.body.event,
+        exhibitor: req.body.exhibitor,
+    })
+
+    res.status(201).json({
+        message: "Booth created",
+    })
+})
+
+
+//EVENT
+app.post('/api/events', upload.single('banner'), async (req,res)=>{
+    const result = await uploadFile(req.file.buffer , req.body.filename);
+    console.log(result);
+    await Event.create({
+        title: req.body.title,
+        discription: req.body.discription,
+        venue: req.body.venue,
+        starteDate: req.body.starteDate,
+        endDate: req.body.endDate,
+        status: req.body.status,
+        banner: {
+            url: result.url,
+            fileId: result.fileId
+        }        
+    })
+
+    res.status(201).json({
+        message: "Event created",
+    })
+})
+
+app.get('/api/events', async (req,res)=>{
+    const events = await Event.find();
+    res.status(200).json({
+        message: "Events fetched",
+        events: events
+    })
+})
 
 export default app;
