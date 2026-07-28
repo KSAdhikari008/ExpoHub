@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import Login from "./pages/1.login/Login";
 import Register from "./pages/2.Registration/Register";
 import Home from "./pages/4.Home/Home";
 import {Routes, Route} from 'react-router-dom'
 function App() {
  
- const [theme, setTheme] = useState('light');
-
- useEffect(()=>{
+//  const [theme, setTheme] = useState('light');
+  
+//  useEffect(()=>{
  
-   document.body.className = theme;
+//    document.body.className = theme;
  
- },[theme]);
+//  },[theme]);
 
   return (
     <Routes>

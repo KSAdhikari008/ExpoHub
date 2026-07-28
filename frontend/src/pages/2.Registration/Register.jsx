@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import heroImage from "./../../assets/registerHero3.jpg";
 import styles from "./Register.module.css";
 import { useState } from "react";
-import { useEffect } from "react";
 
 function Register() {
 
@@ -11,12 +10,6 @@ function Register() {
     email: '',
     password: '',
     role: ''
-  });
-
-  useEffect(()=>{
-  
-    console.log(formData)
-  
   });
 
   function handleSubmit(){

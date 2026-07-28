@@ -18,7 +18,7 @@ app.use(cookieParser());
 const upload = multer({storage: multer.memoryStorage()}); // multer stores the uploaded file temporarily in RAM instead of saving it to your server's disk.
 
 
-// USER 
+// USER (no post, user is created only with auth)
 app.get('/user', async (req,res)=>{
     const user = await User.find();
    

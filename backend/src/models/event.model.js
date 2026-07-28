@@ -8,8 +8,8 @@ const eventSchema = new mongoose.Schema({
     endDate: Date,
     status: {
         type: String,
-        enum: ["Starting Soon", "Ongoing", "Ended"],
-        default: "Starting Soon"
+        enum: ["Upcoming", "Ongoing", "Ended"],
+        default: "Upcoming"
     },
     banner: {
         url: String,
