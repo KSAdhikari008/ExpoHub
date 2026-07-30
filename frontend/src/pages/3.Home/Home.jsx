@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import './Home.css'
+import { Link } from "react-router-dom";
 
 function Home() {
  
@@ -24,7 +25,7 @@ function Home() {
   return (
     <div className="event-container">
       {events.length > 0 && events.map(event => {
- return <div className="event" key={event._id}>
+ return <Link to={`/event/:${event._id}`} className="event" key={event._id} >
           <div className="banner">
             <img src={event.banner.url} alt="" />
           </div>
@@ -34,7 +35,7 @@ function Home() {
           <div className="date">{event.startDate}</div>
           <div className="date">{event.endDate}</div>
           <div className="status">{event.status}</div>
-        </div>
+        </Link>
 })}
     </div>
 

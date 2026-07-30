@@ -135,4 +135,12 @@ app.get('/api/events', async (req,res)=>{
     })
 })
 
+app.get('/api/events/:eventId', async (req,res)=>{
+    const event = await Event.findById(req.params.eventId);
+    res.status(200).json({
+        message: "Event Fetched",
+        event: event
+    })
+})
+
 export default app;
