@@ -1,0 +1,30 @@
+.create-event{
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+button{
+    background-color: rgb(35, 205, 35);
+    color: white;
+    font-size:  18px;
+    font-weight: 500;
+}
+
+.create-event > *{
+    height: 40px;
+    width: 90%;
+}
+
+
+
+.uploadingSubmit{
+    background-color: grey;
+}

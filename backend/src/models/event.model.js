@@ -4,7 +4,7 @@ const eventSchema = new mongoose.Schema({
     title: String,
     discription: String,
     venue: String,
-    starteDate: Date,
+    startDate: Date,
     endDate: Date,
     status: {
         type: String,
@@ -13,6 +13,7 @@ const eventSchema = new mongoose.Schema({
     },
     banner: {
         url: String,
+        thumbnailUrl: String,
         fileId: String
     }
 },{timestamps: true});

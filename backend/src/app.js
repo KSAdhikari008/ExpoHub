@@ -7,15 +7,21 @@ import { User } from './models/user.model.js';
 import { Booth } from './models/booth.model.js';
 import { uploadFile } from './utils/imageKit.js';
 import { Event } from './models/event.model.js';
+import { processImage } from './utils/imageProcessor.js';
+
 const app = express();
 
 // Middleware configurations.
 app.use(express.urlencoded({extended: true, limit: "20kb"}));
 app.use(express.static("public")); // public folder available on request. 
 app.use(express.json({limit: "20kb"}));
-app.use(cors({origin: `${process.env.CORS_ORIGIN}`}));
+app.use(cors({origin: process.env.CORS_ORIGIN}));
 app.use(cookieParser());
-const upload = multer({storage: multer.memoryStorage()}); // multer stores the uploaded file temporarily in RAM instead of saving it to your server's disk.
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 10*1024*1024 // size limited to 10mb.
+    }}); // multer stores the uploaded file temporarily in RAM instead of saving it to your server's disk.
 
 
 // USER (no post, user is created only with auth)
@@ -88,17 +94,24 @@ app.post('/api/booths',upload.single('poster'), async (req,res)=>{
 
 //EVENT
 app.post('/api/events', upload.single('banner'), async (req,res)=>{
-    const result = await uploadFile(req.file.buffer , req.body.filename);
-    console.log(result);
+
+    try{
+
+    
+    const processedBuffer = await processImage(req.file.buffer);
+
+    const result = await uploadFile(processedBuffer , req.body.filename);
+
     await Event.create({
         title: req.body.title,
         discription: req.body.discription,
         venue: req.body.venue,
-        starteDate: req.body.starteDate,
+        startDate: req.body.startDate,
         endDate: req.body.endDate,
         status: req.body.status,
         banner: {
             url: result.url,
+            thumbnailUrl: result.thumbnailUrl,
             fileId: result.fileId
         }        
     })
@@ -106,6 +119,12 @@ app.post('/api/events', upload.single('banner'), async (req,res)=>{
     res.status(201).json({
         message: "Event created",
     })
+
+    }catch(err){
+        res.status(400).json({
+            message: err.message
+        })
+    }
 })
 
 app.get('/api/events', async (req,res)=>{
