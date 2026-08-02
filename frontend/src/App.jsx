@@ -5,6 +5,7 @@ import Home from "./pages/3.Home/Home";
 import {Routes, Route} from 'react-router-dom'
 import CreateEvent from "./pages/6.Admin Dashboard/CreateEvent";
 import EventDetails from "./pages/7.Visitor Event Details/EventDetails";
+import VisitorDashboard from "./pages/4.Visitor Dashboard/VisitorDashboard";
 function App() {
  
 //  const [theme, setTheme] = useState('light');
@@ -22,6 +23,7 @@ function App() {
       <Route path="/create-event" element={<CreateEvent/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
+      <Route path="/Visitor-dashboard" element={<VisitorDashboard/>} />
     </Routes>
   );
 }

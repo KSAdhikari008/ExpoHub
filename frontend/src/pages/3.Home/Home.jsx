@@ -11,7 +11,7 @@ function Home() {
   
     async function getEvents() {
       try{
-        const response = await axios.get('api/events');
+        const response = await axios.get('/api/event');
         setEvents(response.data.events);
       }catch(err){
         console.log(err);
@@ -25,7 +25,7 @@ function Home() {
   return (
     <div className="event-container">
       {events.length > 0 && events.map(event => {
- return <Link to={`/event/:${event._id}`} className="event" key={event._id} >
+ return <Link to={`/event/${event._id}`} className="event" key={event._id} >
           <div className="banner">
             <img src={event.banner.url} alt="" />
           </div>

@@ -1,8 +1,14 @@
 import { User } from "../models/user.model.js";
+import jwt from 'jsonwebtoken'
 
 
 async function getUser(req,res){
-    const user = await User.find();
+
+    const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRETKEY);
+
+    
+
+    const user = await User.findById(decoded.id);
    
     res.status(200).json({
         message: "User fetched",

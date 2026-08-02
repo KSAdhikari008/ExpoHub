@@ -46,11 +46,16 @@ async function postEvent(req,res){
 }
 
 async function getEvent(req,res){
-    const event = await Event.findById(req.params.eventId);
-    res.status(200).json({
-        message: "Event Fetched",
-        event: event
-    })
+    try{
+        console.log(req.params.eventId);
+        const event = await Event.findById(req.params.eventId);
+        res.status(200).json({
+            message: "Event Fetched",
+            event: event
+        })
+    }catch(err){
+        console.log(err.message);
+    }
 }
 
 export {getEvents, postEvent, getEvent};
