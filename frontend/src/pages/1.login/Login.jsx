@@ -17,7 +17,8 @@ function Login() {
 
       const response = await axios.post('/api/auth/login',jsonData,{ withCredentials: true});
       console.log(response.data);
-      navigate(`/${response.data.role}-dashboard/`);
+      navigate('/');
+      // navigate(`/${response.data.role}-dashboard/`);
     }catch(err){
       console.log(err);
     }

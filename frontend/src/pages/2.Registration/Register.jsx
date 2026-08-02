@@ -17,10 +17,17 @@ function Register() {
 
       const response = await axios.post('/api/auth/register',jsonData,{ withCredentials: true});
       console.log(response.data);
-      // const {id, role} = response.data;
-      navigate(`/`);
+      navigate('/');
+      // navigate(`/${response.data.role}-dashboard`);
     }catch(err){
-      console.log(err);
+      // When the server returns a 4xx or 5xx status code, Axios rejects the promise.
+      // error res is accessed through err caught.
+      if(err.response){ 
+        console.error(err.response.data.message);
+      }else{
+      // For other kind of error(network,server down, etc)
+        console.error(err.message);
+      }
     }
     
   }

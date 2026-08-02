@@ -5,10 +5,10 @@ async function registerUser(req,res){
     
     try{
         const {username, email, password, role} = req.body;
+
         const alreadyRegistered = await User.findOne({
             email: email
         })
-        
         if(alreadyRegistered){
             return res.status(409).json({
                 message: "already registered"
@@ -29,11 +29,16 @@ async function registerUser(req,res){
             role: user.role
         },process.env.JWT_SECRETKEY);
         
-        res.cookie('token',token);
+        res.cookie('token',token,{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 1000*60*60*24*7 // 1 week
+        });
         
         res.status(201).json({
             message: "User registered successfully",
-            user: user
+            role: user.role
         })
 
     }catch(err){
@@ -68,11 +73,15 @@ async function loginUser(req,res){
             role: user.role
         }, process.env.JWT_SECRETKEY)
 
-        res.cookie('token',token);
+        res.cookie('token',token,{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 1000*60*60*24*7 // 1 week
+        });
 
         res.status(200).json({
             message: "logged in successfully",
-            id: user._id,
             role: user.role
         })
 

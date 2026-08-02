@@ -1,14 +1,30 @@
 import { Event } from '../models/event.model.js';
+import { User } from '../models/user.model.js';
 import { uploadFile } from "../utils/imageKit.js";
 import { processImage } from "../utils/imageProcessor.js";
+import jwt from 'jsonwebtoken';
 
 
 async function getEvents(req,res){
-    const events = await Event.find();
-    res.status(200).json({
-        message: "Events fetched",
-        events: events
-    })
+
+    try{
+        
+        const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRETKEY)
+        
+        const user = await User.findById(decoded.id);
+        
+        const events = await Event.find();
+        res.status(200).json({
+            message: "Events fetched",
+            events: events,
+            user: user
+        })
+    }catch(err){
+        res.status(400).json({
+            message: err.message
+
+        })
+    }
 }
 
 async function postEvent(req,res){

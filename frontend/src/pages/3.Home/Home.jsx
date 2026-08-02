@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Home() {
  
   const [events, setEvents] = useState([]);
+  const [user, setUser] = useState();
 
   useEffect(()=>{
   
@@ -13,8 +14,9 @@ function Home() {
       try{
         const response = await axios.get('/api/event');
         setEvents(response.data.events);
+        setUser(response.data.user);
       }catch(err){
-        console.log(err);
+        console.log(err.response.data.message);
       }
     }
 
@@ -22,7 +24,8 @@ function Home() {
   
   },[]);
 
-  return (
+  return (<>
+      <h1>{user?.email}</h1>
     <div className="event-container">
       {events.length > 0 && events.map(event => {
  return <Link to={`/event/${event._id}`} className="event" key={event._id} >
@@ -39,7 +42,7 @@ function Home() {
 })}
     </div>
 
-  );
+</>  );
 }
 
 export default Home;

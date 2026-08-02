@@ -2,11 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function VisitorDashboard() {
+function ExhibitorDashboard() {
 
     const [user, setUser] = useState();
  
-useEffect(()=>{
+ useEffect(()=>{
  
    async function getVisitor() {
     try{
@@ -23,11 +23,11 @@ useEffect(()=>{
  },[]);
 
   return (
-    <div className="visitor">
-      <h1>Visitor Dashboard</h1>
+    <div className="exhibitor">
+      <h1>Exhibitor Dashboard</h1>
       <div className="user">{user?.username} {user?.email} <br /> {user?.role}</div>
     </div>
   );
 }
 
-export default VisitorDashboard;
+export default ExhibitorDashboard;
