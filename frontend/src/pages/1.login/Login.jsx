@@ -20,7 +20,13 @@ function Login() {
       navigate('/');
       // navigate(`/${response.data.role}-dashboard/`);
     }catch(err){
-      console.log(err.response.data.message);
+      //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.
+      if(err.response){ 
+        console.error(err.response.data.message);
+      }else{
+      // if no response from the server (network,server down, etc).Then error is accessed throught err directly.
+        console.error(err.message);
+      }
     }
     
   }

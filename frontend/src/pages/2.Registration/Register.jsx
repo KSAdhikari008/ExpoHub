@@ -20,12 +20,11 @@ function Register() {
       navigate('/');
       // navigate(`/${response.data.role}-dashboard`);
     }catch(err){
-      // When the server returns a 4xx or 5xx status code, Axios rejects the promise.
-      // error res is accessed through err caught.
+      //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.
       if(err.response){ 
         console.error(err.response.data.message);
       }else{
-      // For other kind of error(network,server down, etc)
+      // if no response from the server (network,server down, etc).Then error is accessed throught err directly.
         console.error(err.message);
       }
     }
