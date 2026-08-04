@@ -58,8 +58,8 @@ function Login() {
               <p>Sign in to continue to your account</p>
             </div>
             <form onSubmit={handleSubmit} className={`${styles["login-form"]} border-2 border-blue-400 basis-9/10 flex flex-col justify-center items-center w-8/10  `}>
-              <label htmlFor="email" className="text-left w-2/4 ">Enter Address</label>
-              <input type="email" name="email" id="email" placeholder="you@example.com" required 
+              <label htmlFor="identifier" className="text-left w-2/4 ">Enter email or username</label>
+              <input type="text" name="identifier" id="identifier" placeholder="email or username" required 
                       className="border rounded mt-2 mb-7 pl-7 pb-1 h-1/12 w-2/4" />
               <label htmlFor="password" className="w-2/4 text-left">Password</label>
               <input type="password" name="password" id="password" placeholder="Enter your password" required 

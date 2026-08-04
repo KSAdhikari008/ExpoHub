@@ -1,27 +1,33 @@
 import { User } from "../models/user.model.js";
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt'
 
 async function registerUser(req,res){
     
     try{
-        const {username, email, password, role} = req.body;
-
+        const { email, username, password, role} = req.body;
+        
         const alreadyRegistered = await User.findOne({
-            email: email
+            $or: [ // username email both are unique
+                {email},
+                {username}
+            ]
         })
         if(alreadyRegistered){
             return res.status(409).json({
-                message: "already registered"
+                message: "already registered. Try logging in."
             })
         }
+
+        const hash = await bcrypt.hash(password, 10);
     
         // In a race condition ,the above validation may get bypassed if two user register with the same email at the exact saem time.
         // Hence the try block is wrapped, User.create throw an error since email is unique.
         const user = await User.create({
-            username: username,
-            email: email,
-            password: password,
-            role: role
+            username,
+            email,
+            password: hash,
+            role
         })
 
         const token = jwt.sign({
@@ -29,7 +35,7 @@ async function registerUser(req,res){
             role: user.role
         },process.env.JWT_SECRETKEY);
         
-        res.cookie('token',token,{
+        res.cookie('token_ExpoHub',token,{
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
@@ -38,7 +44,6 @@ async function registerUser(req,res){
         
         res.status(201).json({
             message: "User registered successfully",
-            role: user.role
         })
 
     }catch(err){
@@ -51,20 +56,34 @@ async function registerUser(req,res){
         console.error(err);
 
         return res.status(500).json({
-            message: "Internal Server Error"
+            message: "Internal Server Error: " + err.message,
         });
     }
 }
 
 async function loginUser(req,res){
     try{
-        const user = await User.findOne({
-            email: req.body.email
-        })
 
+        const {identifier, password} = req.body;
+
+        const user = await User.findOne({
+            $or: [
+                {email: identifier},
+                {username: identifier}
+            ]
+        })
         if(!user){
             return res.status(401).json({
-                message: "User is not signedIn."
+                message: "User not found. Please registeirr first."
+                // message: "invalid email or password" // production
+            })
+        }
+
+        const isPswdValid = await bcrypt.compare(password, user.password);
+        if(!isPswdValid){
+            return res.status(404).json({
+                message: "wrong password."
+                // message: "invalid email or password" // production
             })
         }
 
@@ -73,8 +92,8 @@ async function loginUser(req,res){
             role: user.role
         }, process.env.JWT_SECRETKEY)
 
-        res.cookie('token',token,{
-            httpOnly: true,
+        res.cookie('token_ExpoHub',token,{
+            httpOnly: true, 
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
             maxAge: 1000*60*60*24*7 // 1 week
@@ -87,7 +106,7 @@ async function loginUser(req,res){
 
     }catch(err){
         res.status(400).json({
-            message: err.message
+            message: "Internal Server Error: " + err.message,
         })
     }
 }
