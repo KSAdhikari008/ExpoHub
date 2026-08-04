@@ -111,4 +111,27 @@ async function loginUser(req,res){
     }
 }
 
-export {registerUser, loginUser};
+async function getUser(req,res){
+    try{
+        const token = req.cookies?.token_ExpoHub; // returns undefined if token is absent
+        if(!token){
+            return res.status(200).json({
+                message: "Authentication token missing.",
+                role: null
+        })
+        }
+
+        const {id, role} =  jwt.verify(req.cookies.token_ExpoHub, process.env.JWT_SECRETKEY);
+        res.status(200).json({
+            message: "user details",
+            role: role
+        })
+
+    }catch(err){
+        res.status(400).json({
+            message: "Internal Server Error: " + err.message
+        })
+    }
+}
+
+export {registerUser, loginUser, getUser};

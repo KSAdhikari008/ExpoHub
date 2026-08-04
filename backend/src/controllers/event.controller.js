@@ -7,22 +7,15 @@ import jwt from 'jsonwebtoken';
 
 async function getEvents(req,res){
 
-    try{
-        
-        const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRETKEY)
-        
-        const user = await User.findById(decoded.id);
-        
+    try{        
         const events = await Event.find();
         res.status(200).json({
             message: "Events fetched",
             events: events,
-            user: user
         })
     }catch(err){
         res.status(400).json({
             message: err.message
-
         })
     }
 }
@@ -63,11 +56,10 @@ async function postEvent(req,res){
 
 async function getEvent(req,res){
     try{
-        console.log(req.params.eventId);
         const event = await Event.findById(req.params.eventId);
         res.status(200).json({
             message: "Event Fetched",
-            event: event
+            event: event,
         })
     }catch(err){
         console.log(err.message);

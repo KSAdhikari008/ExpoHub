@@ -8,6 +8,7 @@ function Home() {
   const [events, setEvents] = useState([]);
   const [user, setUser] = useState();
 
+
   useEffect(()=>{
   
     async function getEvents() {

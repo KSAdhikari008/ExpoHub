@@ -10,7 +10,7 @@ useEffect(()=>{
  
    async function getVisitor() {
     try{
-        const response = await axios.get('/api/user/',{withCredentials: true});
+        const response = await axios.get('/api/user/');
         console.log(response.data);
         setUser(response.data.user);
     }catch(err){

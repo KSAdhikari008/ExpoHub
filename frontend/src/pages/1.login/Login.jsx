@@ -15,10 +15,9 @@ function Login() {
     
     try{
 
-      const response = await axios.post('/api/auth/login',jsonData,{ withCredentials: true});
+      const response = await axios.post('/api/auth/login',jsonData);
       console.log(response.data);
       navigate('/');
-      // navigate(`/${response.data.role}-dashboard/`);
     }catch(err){
       //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.
       if(err.response){ 
