@@ -6,13 +6,13 @@ const imagekit = new ImageKit({
 })
 
 
-function uploadFile(fileBuffer,filename){
+function uploadFile(fileBuffer,filename,folderPath){
     // Returns ImageKit's upload Promise to be awaited by the caller.
     return imagekit.files.upload({
         file: fileBuffer.toString("base64"),
-        fileName: filename 
+        fileName: filename,
+        folder: `/ExpoHub/${folderPath}`
     })
-
 }
 
 function deleteFile(id){

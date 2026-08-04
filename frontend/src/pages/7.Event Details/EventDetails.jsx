@@ -1,4 +1,4 @@
-import {  useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import styles from './EventDetails.module.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -9,6 +9,7 @@ function EventDetails() {
   const [role, setRole] = useState();
   
   const {eventId} = useParams(); 
+  const navigate = useNavigate();
 
 
   useEffect(()=>{
@@ -33,7 +34,16 @@ function EventDetails() {
 
   async function handleRoleAction(){
 
-    console.log('some');
+    if(role === "Visitor"){
+      navigate('/registration')
+    }else if(role === 'Exhibitor'){
+      navigate('/booth-booking')
+    }else if(role === 'Admin'){
+      navigate(`/event/${eventId}/edit`)
+    }else{
+      navigate('/login')
+    }
+
   }
 
   

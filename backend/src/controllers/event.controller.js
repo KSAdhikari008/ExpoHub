@@ -24,18 +24,18 @@ async function postEvent(req,res){
 
     try{
 
-    
+    const {title, discription, venue, startDate, endDate, status} = req.body;
     const processedBuffer = await processImage(req.file.buffer);
 
-    const result = await uploadFile(processedBuffer , req.body.filename);
+    const result = await uploadFile(processedBuffer, title, 'event');
 
     await Event.create({
-        title: req.body.title,
-        discription: req.body.discription,
-        venue: req.body.venue,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        status: req.body.status,
+        title: title,
+        discription: discription,
+        venue: venue,
+        startDate: startDate,
+        endDate: endDate,
+        status: status,
         banner: {
             url: result.url,
             thumbnailUrl: result.thumbnailUrl,
@@ -62,7 +62,9 @@ async function getEvent(req,res){
             event: event,
         })
     }catch(err){
-        console.log(err.message);
+        res.status(400).json({
+            message: err.message
+        })
     }
 }
 
