@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 export const eventValidator = [
     body('title')
@@ -56,3 +56,9 @@ export const eventValidator = [
         return true;
     })
 ];
+
+export const eventIdValidator = [
+    param('eventId')    
+        .isMongoId()
+        .withMessage('Invalid parameter.')
+]

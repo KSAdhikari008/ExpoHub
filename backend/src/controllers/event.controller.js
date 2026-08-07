@@ -58,6 +58,13 @@ async function postEvent(req,res){
 async function getEvent(req,res){
     try{
         const event = await Event.findById(req.params.eventId);
+
+        if(!event){
+            return res.status(404).json({
+                message: "Event not found"
+            })
+        }
+        
         res.status(200).json({
             message: "Event Fetched",
             event: event,

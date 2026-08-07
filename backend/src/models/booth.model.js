@@ -26,7 +26,7 @@ const boothSchema = new mongoose.Schema({
     exhibitor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      default: null
     }
     
 },{timestamps: true});

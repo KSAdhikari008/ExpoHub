@@ -1,16 +1,18 @@
 import { Router } from 'express'
 import multer from 'multer';
-import { getBooths, postBooth } from '../controllers/booth.controller.js';
+import { getBooths, createBooth, deleteBooth } from '../controllers/booth.controller.js';
+import { uploadImage } from '../middleware/multer.middleware.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.middleware.js';
+import { validate } from '../middleware/validate.js';
+import { boothValidator, boothIdValidator } from '../middleware/validators/booth.validator.js';
 
 const router = Router();
-const upload = multer({
-    storage: multer.memoryStorage(),
-    limits: {
-        fileSize: 10*1024*1024 // size limited to 10mb.
-    }}); // multer stores the uploaded file temporarily in RAM instead of saving it to your server's disk.
 
-router.get('/', getBooths);
-router.post('/', upload.single('poster'), postBooth);
+router.get('/', authenticateToken, authorizeRole('Admin'), getBooths); // (Admin)
+router.post("/", authenticateToken, authorizeRole("Admin"), uploadImage.single("poster"), boothValidator, validate, createBooth );
+router.delete('/:boothId', authenticateToken, authorizeRole("Admin"), boothIdValidator, validate, deleteBooth );
+
+// make bookBooth api for exhibitor.
 
 
 export default router;
