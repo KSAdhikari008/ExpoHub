@@ -34,7 +34,7 @@ function Home() {
             <img src={event.banner.url} alt="" />
           </div>
           <div className="title">{event.title}</div>
-          <div className="discription">{event.discription}</div>
+          <div className="description">{event.description}</div>
           <div className="venue">{event.venue}</div>
           <div className="date">{event.startDate}</div>
           <div className="date">{event.endDate}</div>

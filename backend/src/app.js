@@ -26,4 +26,10 @@ app.use('/api/users', userRouter);
 app.use('/api/events', eventRouter);
 app.use('/api/booths', boothRouter);
 
+app.use((err,req,res,next)=>{
+    res.status(err.status || 500).json({
+        message: err.message
+    })
+})
+
 export default app;

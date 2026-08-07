@@ -55,7 +55,7 @@ function EventDetails() {
           <img src={event.banner.url} alt="" />
         </div>
         <div className={styles.title}>{event.title}</div>
-        <div className={styles.discription}>{event.discription}</div>
+        <div className={styles.description}>{event.description}</div>
         <div className={styles.venue}>{event.venue}</div>
         <div className={styles.date}>{event.startDate}</div>
         <div className={styles.date}>{event.endDate}</div>

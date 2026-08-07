@@ -19,7 +19,7 @@ function CreateEvent() {
   return (
         <form onSubmit={handleSubmit} className='create-event'>
             <input type="text" required  name="title" placeholder='title' />
-            <input type="text" required  name="discription" placeholder='discription' />
+            <input type="text" required  name="description" placeholder='description' />
             <input type="text" required  name="venue" placeholder='venue' />
             <input type="date" required  name="startDate" placeholder='startDate' />
             <input type="date" required  name="endDate" placeholder='endDate' />

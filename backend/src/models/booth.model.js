@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const boothSchema = new mongoose.Schema({
     boothName: String,
     boothNumber: Number,
-    discription: String,
+    description: String,
     size: {
         type: String,
         enum: ["Small", "Medium", "Large"],

@@ -1,3 +1,4 @@
+import { matchedData } from 'express-validator';
 import { Event } from '../models/event.model.js';
 import { User } from '../models/user.model.js';
 import { uploadFile } from "../utils/imageKit.js";
@@ -24,14 +25,14 @@ async function postEvent(req,res){
 
     try{
 
-    const {title, discription, venue, startDate, endDate, status} = req.body;
-    const processedBuffer = await processImage(req.file.buffer);
+    const {title, description, venue, startDate, endDate, status} = matchedData(req);
+    const processedBuffer = await processImage(req.file.buffer); // sharp
 
-    const result = await uploadFile(processedBuffer, title, 'event');
+    const result = await uploadFile(processedBuffer, title, 'event'); //ImageKit
 
     await Event.create({
         title: title,
-        discription: discription,
+        description: description,
         venue: venue,
         startDate: startDate,
         endDate: endDate,

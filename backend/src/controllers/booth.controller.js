@@ -19,7 +19,7 @@ async function postBooth(req,res){
     await Booth.create({
         boothName: req.body.boothName,
         boothNumber: req.body.boothNumber,
-        discription: req.body.discription,
+        description: req.body.description,
         size: req.body.size,
         poster: {
             url: result.url,

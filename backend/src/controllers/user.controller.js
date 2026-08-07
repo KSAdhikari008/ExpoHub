@@ -48,6 +48,8 @@ async function getUserById(req,res){
     }
 }
 
+
+
 async function patchUser(req,res){
     try{
         await User.findOneAndUpdate({
