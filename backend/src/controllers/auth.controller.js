@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 async function registerUser(req,res){
     
     try{
-        const { email, username, password, role} = req.body;
+        const { email, username, password, role} = req.body; // validation
         
         const alreadyRegistered = await User.findOne({
             $or: [ // username email both are unique

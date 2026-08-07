@@ -11,8 +11,11 @@ async function getBooths(req,res){
 }
 
 async function postBooth(req,res){
+
+    
+
     const result = await uploadFile(req.file.buffer, req.body.filename);
-    console.log(result);
+
     await Booth.create({
         boothName: req.body.boothName,
         boothNumber: req.body.boothNumber,
