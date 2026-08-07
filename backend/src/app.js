@@ -21,9 +21,9 @@ app.use(cookieParser());
 
 
 // API's
-app.use('/api/user', userRouter); //(no post, user is created only with auth)
-app.use('/api/booth', boothRouter);
-app.use('/api/event', eventRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter); 
+app.use('/api/events', eventRouter);
+app.use('/api/booths', boothRouter);
 
 export default app;

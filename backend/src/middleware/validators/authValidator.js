@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 
-export const registerValidation = [
+export const registerValidator = [
   body("username")
     .trim()
     .notEmpty()
@@ -18,8 +18,7 @@ export const registerValidation = [
     .withMessage("Invalid email format")
     .normalizeEmail(), // converts the email to standard format
 
-  body("password")
-    .trim()
+  body("password") // no trim , keep paswd as it is.
     .notEmpty()
     .withMessage("Pasword is required")
     .isLength({ min: 7, max: 20 })
@@ -40,3 +39,16 @@ export const registerValidation = [
     .isIn(["Visitor", "Admin", "Exhibitor"])
     .withMessage("Invlaid role"),
 ];
+
+export const loginValidator = [
+    body('identifier') // no islength cause email can be very long.
+        .trim()
+        .notEmpty()
+        .withMessage("Username or email is required."),
+
+    body('password') // no trim.
+        .notEmpty()
+        .withMessage("Password is required.")
+        .isLength({min: 7, max: 20})
+        .withMessage("Invalid password.") // don't mention about pswd format to the user.
+]

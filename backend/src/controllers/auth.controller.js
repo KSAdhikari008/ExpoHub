@@ -1,12 +1,13 @@
 import { User } from "../models/user.model.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
+import { matchedData } from "express-validator";
 
 async function registerUser(req,res){
     
     try{
-        const { email, username, password, role} = req.body; // validation
-        
+        const { email, username, password, role} = matchedData(req);
+                
         const alreadyRegistered = await User.findOne({
             $or: [ // username email both are unique
                 {email},
@@ -64,11 +65,11 @@ async function registerUser(req,res){
 async function loginUser(req,res){
     try{
 
-        const {identifier, password} = req.body;
+        const {identifier, password} = matchedData(req);
 
         const user = await User.findOne({
             $or: [
-                {email: identifier},
+                {email: identifier.toLowerCase()}, // registered emails have been standardized to lowercase through validators.
                 {username: identifier}
             ]
         })
@@ -113,15 +114,7 @@ async function loginUser(req,res){
 
 async function getUser(req,res){
     try{
-        const token = req.cookies?.token_ExpoHub; // returns undefined if token is absent
-        if(!token){
-            return res.status(200).json({
-                message: "Authentication token missing.",
-                role: null
-        })
-        }
-
-        const {id, role} =  jwt.verify(req.cookies.token_ExpoHub, process.env.JWT_SECRETKEY);
+       const {id, role} = req.user;
         res.status(200).json({
             message: "user details",
             role: role
