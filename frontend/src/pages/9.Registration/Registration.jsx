@@ -16,6 +16,7 @@ function Registration() {
         }else{
           navigate('/unauthorized')
         }
+
     }
   
     checkRole();
@@ -24,11 +25,10 @@ function Registration() {
  
   return (
     <div className="registratioin">
-        {isVisitor 
-            ? <div className="registration">
-                <button>registration</button>
+        {isVisitor && 
+             <div className="registration">
+                <div className="registration-form">Some details to be filled or something.</div>
             </div>  
-            : <h1 className="not visitor">403 Unauthorized</h1> 
         }
     </div>
   );

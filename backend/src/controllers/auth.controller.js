@@ -73,16 +73,16 @@ async function loginUser(req,res){
         })
         if(!user){
             return res.status(401).json({
-                message: "User not found. Please registeirr first."
-                // message: "invalid email or password" // production
+                // message: "User not found. Please registeirr first."
+                message: "invalid email or password" // production
             })
         }
 
         const isPswdValid = await bcrypt.compare(password, user.password);
         if(!isPswdValid){
             return res.status(404).json({
-                message: "wrong password."
-                // message: "invalid email or password" // production
+                // message: "wrong password."
+                message: "invalid email or password" // production
             })
         }
 
@@ -133,7 +133,8 @@ async function getUser(req,res){
        const {id, role} = req.user;
         res.status(200).json({
             message: "user details",
-            role: role
+            role: role,
+            id: id
         })
 
     }catch(err){
@@ -143,4 +144,4 @@ async function getUser(req,res){
     }
 }
 
-export {registerUser, loginUser, getUser};
+export {registerUser, loginUser, getUser, logoutUser};

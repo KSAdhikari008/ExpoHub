@@ -24,12 +24,11 @@ function Booking() {
   });
  
   return (
-    <div className="registratioin">
-        {isExhibitor 
-            ? <div className="bookBooth">
-                <button>Book booth</button>
+    <div className="book-Booth">
+        {isExhibitor && 
+             <div className="bookBooth">
+                <div className="registration-form">Some details to be filled or something.</div>
               </div>  
-            : <h1 className="not visitor">403 Unauthorized</h1> 
         }
     </div>
   );

@@ -14,17 +14,28 @@ function Register() {
     const jsonData = Object.fromEntries(formData);
     
     try{
-
-      const response = await axios.post('/api/auth/register',jsonData,);
-      console.log(response.data);
+      await axios.post('/api/auth/register',jsonData,);
       navigate('/');
     }catch(err){
       //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.
       if(err.response){ 
-        console.error(err.response.data.message);
+
+        if(Array.isArray(err.response.data.message)){ // input validation err's are in an array.
+           let errorMessage = '';
+           err.response.data.message.forEach((m, index) => errorMessage += (index+1) + '. ' + m.msg + '\n');
+           alert(errorMessage);
+        }else{
+          alert(err.response.data.message);
+        }
+        
+      }else if(err.request){ // req error , when no res to req.
+         alert("Unable to connect to the server.");
+         console.error("No response received:", err.message);
+
       }else{
       // if no response from the server (network,server down, etc).Then error is accessed throught err directly.
-        console.error(err.message);
+         alert("Something went wrong.");
+         console.error("Request setup error:", err.message);
       }
     }
     

@@ -8,6 +8,7 @@ import Registration from "./pages/9.Registration/Registration";
 import Booking from "./pages/10.Booking/Booking";
 import EditEvent from "./pages/8.Edit Event/EditEvent";
 import Unauthorized from "./pages/unauthorized";
+import NotFound from "./pages/NotFound";
 function App() {
  
 //  const [theme, setTheme] = useState('light');
@@ -25,9 +26,10 @@ function App() {
       <Route path="/register" element={<Register/>} />
       <Route path="/event/:eventId" element={<EventDetails/>} />
       <Route path="/registration" element={<Registration/>} />
-      <Route path="/booth-booking" element={<Booking/>} />
+      <Route path="/booking/:boothId" element={<Booking/>} />
       <Route path="/event/:eventId/edit" element={<EditEvent/>} />
       <Route path="/unauthorized" element={<Unauthorized/>} />
+      <Route path="*" element={<NotFound/>} />
     </Routes>
   );
 }

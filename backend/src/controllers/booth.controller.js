@@ -4,12 +4,19 @@ import { Booth } from './../models/booth.model.js';
 
 
 async function getEventBooths(req,res){
-    const {eventId} = matchedData(req);
-    const booths = await Booth.find({event: eventId});
-    res.status(200).json({
-        message: "booths fetched",
-        booths: booths
-    })
+    try{
+
+        const {eventId} = matchedData(req);
+        const booths = await Booth.find({event: eventId});
+        res.status(200).json({
+            message: "booths fetched",
+            booths: booths
+        })
+    } catch(err){
+        res.status(400).json({
+            message: err.message
+        })
+    }
 }
 
 async function createBooth(req,res){

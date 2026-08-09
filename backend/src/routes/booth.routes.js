@@ -9,10 +9,11 @@ import { eventIdValidator } from '../middleware/validators/event.validator.js';
 
 const router = Router();
 
-router.get('/:eventId', authenticateToken, authorizeRole('Admin'), eventIdValidator, validate, getEventBooths); // (Admin)
+router.get('/:eventId', authenticateToken, authorizeRole('Admin','Exhibitor'), eventIdValidator, validate, getEventBooths); // (Admin)
+// router.get('/:boothId')
 router.post("/", authenticateToken, authorizeRole("Admin"), uploadImage.single("poster"), boothValidator, validate, createBooth );
 router.delete('/:boothId', authenticateToken, authorizeRole("Admin"), boothIdValidator, validate, deleteBooth );
-router.patch('/booking/:boothId', authenticateToken, authorizeRole("Exhibitor"), boothIdValidator, validate, bookBooth )
+router.patch('/booking/:boothId', authenticateToken, authorizeRole("Exhibitor"), boothIdValidator, validate, bookBooth );
 
 
 export default router;

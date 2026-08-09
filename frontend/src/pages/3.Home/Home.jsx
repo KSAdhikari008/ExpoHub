@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import './Home.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
  
   const [events, setEvents] = useState([]);
-  const [user, setUser] = useState();
+  const [isUser, setIsUser] = useState(false);
 
+  const navigate = useNavigate();
 
   useEffect(()=>{
   
     async function getEvents() {
       try{
-        const response = await axios.get('/api/event');
+        const response = await axios.get('/api/events');
         setEvents(response.data.events);
-        setUser(response.data.user);
+        const authRes = await axios.get('/api/auth/me');
+        setIsUser(authRes.data.role);
       }catch(err){
-        console.log(err.response.data.message);
+        if(err.response){
+            // if the error is not due to authentication, log it
+            if(err.response.data.message !== 'Authentication token is missing or invalid'){ 
+              console.log(err.response.data.message);
+            }
+        }else{
+          console.log(err.message);
+        }
       }
     }
 
@@ -25,9 +34,21 @@ function Home() {
   
   },[]);
 
+
+  function logoutUser(){
+    try{
+      axios.post('/api/auth/logout');
+      setIsUser(false);
+      navigate('/login');
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
+  }
+
   return (<>
-      <h1>{user?.email}</h1>
     <div className="event-container">
+      {isUser && <button onClick={logoutUser}>Logout</button>}
+
       {events.length > 0 && events.map(event => {
  return <Link to={`/event/${event._id}`} className="event" key={event._id} >
           <div className="banner">
