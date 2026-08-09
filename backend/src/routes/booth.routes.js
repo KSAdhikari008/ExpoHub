@@ -1,18 +1,18 @@
 import { Router } from 'express'
 import multer from 'multer';
-import { getBooths, createBooth, deleteBooth } from '../controllers/booth.controller.js';
+import { getEventBooths, createBooth, deleteBooth, bookBooth } from '../controllers/booth.controller.js';
 import { uploadImage } from '../middleware/multer.middleware.js';
 import { authenticateToken, authorizeRole } from '../middleware/auth.middleware.js';
 import { validate } from '../middleware/validate.js';
 import { boothValidator, boothIdValidator } from '../middleware/validators/booth.validator.js';
+import { eventIdValidator } from '../middleware/validators/event.validator.js';
 
 const router = Router();
 
-router.get('/', authenticateToken, authorizeRole('Admin'), getBooths); // (Admin)
+router.get('/:eventId', authenticateToken, authorizeRole('Admin'), eventIdValidator, validate, getEventBooths); // (Admin)
 router.post("/", authenticateToken, authorizeRole("Admin"), uploadImage.single("poster"), boothValidator, validate, createBooth );
 router.delete('/:boothId', authenticateToken, authorizeRole("Admin"), boothIdValidator, validate, deleteBooth );
-
-// make bookBooth api for exhibitor.
+router.patch('/booking/:boothId', authenticateToken, authorizeRole("Exhibitor"), boothIdValidator, validate, bookBooth )
 
 
 export default router;

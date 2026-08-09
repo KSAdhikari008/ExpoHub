@@ -76,4 +76,5 @@ async function getEvent(req,res){
     }
 }
 
+
 export {getEvents, postEvent, getEvent};

@@ -48,13 +48,11 @@ async function registerUser(req,res){
         })
 
     }catch(err){
-        if(err.code === 11000){ // status code thrown by User.create if email is duplicate
+        if(err.code === 11000){ // status code thrown by User.create if email or username is duplicate
             res.status(409).json({
                 message: "Email already Exists."
             })
         }
-
-        console.error(err);
 
         return res.status(500).json({
             message: "Internal Server Error: " + err.message,
@@ -109,6 +107,24 @@ async function loginUser(req,res){
         res.status(400).json({
             message: "Internal Server Error: " + err.message,
         })
+    }
+}
+
+async function logoutUser(req, res) {
+    try {
+        res.clearCookie("token_ExpoHub",{ // providing the cofiges as well
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict"
+        });
+
+        return res.status(200).json({
+            message: "Logged out successfully"
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message
+        });
     }
 }
 

@@ -9,7 +9,8 @@ const router = Router();
 
 router.post('/register', registerValidator, validate, registerUser); // (all)
 router.post('/login', loginValidator, validate, loginUser); // (all)
-router.get('/me', authenticateToken, getUser); // get current user role (any user)
+router.post('/logout', logoutUser) // (any)
+router.get('/me', authenticateToken, getUser); // get current user role (any)
 
 
 export default router;

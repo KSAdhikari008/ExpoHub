@@ -15,8 +15,8 @@ const boothSchema = new mongoose.Schema({
     },
     status:{
         type: String,
-        enum: ["Pending","Approved","Rejected"],
-        default: "Pending"
+        enum: ["Available","Booked"],
+        default: "Available"
     },
     event: {
         type: mongoose.Schema.Types.ObjectId,

@@ -5,6 +5,7 @@ import boothRouter from './routes/booth.routes.js';
 import eventRouter from './routes/event.routes.js';
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js'
+import registrationRouter from './routes/registration.routes.js';
 
 
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter); 
 app.use('/api/events', eventRouter);
 app.use('/api/booths', boothRouter);
+app.use('/api/registrations', registrationRouter)
 
 app.use((err,req,res,next)=>{
     res.status(err.status || 500).json({

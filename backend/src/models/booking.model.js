@@ -1,30 +1,33 @@
-import mongoose from 'mongoose'
+// No need , booth model is enough
 
-const bookingSchema = new mongoose.Schema(
-  {
-    exhibitor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
 
-    booth: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Booth",
-      required: true,
-    },
+// import mongoose from 'mongoose'
 
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: ["Pending", "Confirmed"],
-      default: "Pending",
-    },
+// const bookingSchema = new mongoose.Schema(
+//   {
+//     exhibitor: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "User",
+//       required: true,
+//     },
 
-}, {timestamps: true,});
+//     booth: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "Booth",
+//       required: true,
+//     },
 
-export const Booking = mongoose.model('Booking', bookingSchema);
+//     event: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "Event",
+//       required: true,
+//     },
+//     status: {
+//       type: String,
+//       enum: ["Pending", "Confirmed"],
+//       default: "Pending",
+//     },
+
+// }, {timestamps: true,});
+
+// export const Booking = mongoose.model('Booking', bookingSchema);
