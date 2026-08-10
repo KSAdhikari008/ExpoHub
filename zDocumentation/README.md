@@ -50,14 +50,16 @@ These screenshots provide a visual walkthrough of the system.
 
 ---
 
-### 3. Diagrams *(no diagram as of now)*
+### 3. Diagrams 
 
 If included, this folder contains system design diagrams such as:
 
+* Application Flow Diagram
+* Model diagram
+* Layouts diagram
 * System Architecture Diagram
 * Use Case Diagram
 * Entity Relationship (ER) Diagram
-* Application Flow Diagram
 
 These diagrams illustrate the overall structure and workflow of the application.
 
