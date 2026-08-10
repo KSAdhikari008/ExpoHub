@@ -4,8 +4,8 @@ import dotenv from 'dotenv/config';
 
 connectDB()
 .then(()=>{
-    app.listen(process.env.PORT || 8000, ()=>{
-        console.log("Server is live at port: ",process.env.PORT || 8000);
+    app.listen(process.env.PORT || 5000, ()=>{
+        console.log("Server is live at port: ",process.env.PORT || 5000);
     })
 })
 .catch(err => {
