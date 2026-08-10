@@ -7,7 +7,7 @@ import EventDetails from "./pages/7.Event Details/EventDetails";
 import Registration from "./pages/9.Registration/Registration";
 import Booking from "./pages/10.Booking/Booking";
 import EditEvent from "./pages/8.Edit Event/EditEvent";
-import Unauthorized from "./pages/unauthorized";
+import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 function App() {
  
