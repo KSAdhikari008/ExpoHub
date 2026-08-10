@@ -10,7 +10,7 @@ export default defineConfig({
     ],
   server: {
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'https://expohub-qsaz.onrender.com'
     }
   }
 })
