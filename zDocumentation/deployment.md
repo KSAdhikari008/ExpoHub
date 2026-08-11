@@ -120,7 +120,7 @@ Localhost uses HTTP , so keep sameSite: 'strict'
 
 ## 7 Vercel reload and direct url access issue
 
- In vercel.json:
+ In frontend/vercel.json:
 
   {
     "rewrites": [
