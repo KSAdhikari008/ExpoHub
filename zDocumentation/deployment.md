@@ -95,3 +95,40 @@ Render Workspace
     └── Backend
 ```
 
+## 6 Cookie `SameSite` — Development vs Production
+
+`SameSite` controls whether a browser sends a cookie with cross-site requests.
+
+### Production 
+
+with sameSite: 'none', secure must be true, then only then borwser stores the cookie, or it rejects it.
+
+Use:
+
+```js
+res.cookie("token_ExpoHub", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 1000 * 60 * 60 * 24 * 7
+});
+```
+
+### Development — Local HTTP
+
+Localhost uses HTTP , so keep sameSite: 'strict'
+
+Example:
+
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:5000`
+
+Use:
+
+```js
+res.cookie("token_ExpoHub", token, {
+  httpOnly: true,
+  secure: false,
+  sameSite: "strict",
+  maxAge: 1000 * 60 * 60 * 24 * 7
+});

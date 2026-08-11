@@ -19,6 +19,26 @@ async function getEventBooths(req,res){
     }
 }
 
+async function getBooth(req,res){
+    try {
+        const {boothId} = matchedData(req);
+        const booth = await Booth.findById(boothId);
+        if(!booth){
+            return res.status(404).json({
+                message: "Booth not found"
+            });
+        }
+        res.status(200).json({
+            message: "Booth fetched",
+            booth: booth
+        })
+    } catch(err){
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}
+
 async function createBooth(req,res){
     try {
         const {boothName, description, boothNumber, size, event} = matchedData(req);
@@ -106,4 +126,4 @@ async function bookBooth(req,res){
 
 }
 
-export {getEventBooths, createBooth, deleteBooth, bookBooth};
+export {getEventBooths, getBooth,createBooth, deleteBooth, bookBooth};

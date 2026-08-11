@@ -21,7 +21,7 @@ function Home() {
       }catch(err){
         if(err.response){
             // if the error is not due to authentication, log it
-            if(err.response.data.message !== 'Authentication token is missing or invalid'){ 
+            if(err.response.data.message !== 'Authentication token is missing'){ 
               console.log(err.response.data.message);
             }
         }else{
