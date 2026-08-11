@@ -99,36 +99,36 @@ Render Workspace
 
 `SameSite` controls whether a browser sends a cookie with cross-site requests.
 
-### Production 
+#### In Production 
 
 with sameSite: 'none', secure must be true, then only then borwser stores the cookie, or it rejects it.
 
-Use:
-
-```js
-res.cookie("token_ExpoHub", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 1000 * 60 * 60 * 24 * 7
-});
-```
-
-### Development — Local HTTP
+####  In development 
 
 Localhost uses HTTP , so keep sameSite: 'strict'
 
-Example:
+#### Use:
 
-- Frontend: `http://localhost:5173`
-- Backend: `http://localhost:5000`
+ ```js
+ res.cookie('token_ExpoHub',token,{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? 'none' : "strict",
+            maxAge: 1000*60*60*24*7 // 1 week
+        });
+```
 
-Use:
+## 7 Vercel reload and direct url access issue
 
-```js
-res.cookie("token_ExpoHub", token, {
-  httpOnly: true,
-  secure: false,
-  sameSite: "strict",
-  maxAge: 1000 * 60 * 60 * 24 * 7
-});
+ In vercel.json:
+
+  {
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }
+
+ React creates a SPA, everything is on one page, react router handles the navigation.Vercel needs this rewrite for React Router routes.  Without it, directly visiting or refreshing a route like /events/123 makes Vercel look for a physical file/path and return 404. This redirects all requests to index.html, allowing React Router to handle the URL on the client side.
