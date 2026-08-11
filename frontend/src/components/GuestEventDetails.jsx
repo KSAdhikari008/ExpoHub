@@ -1,14 +1,16 @@
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import styles from './GuestEventDetails.module.css'
+
 
 function GuestEventDetails() {
  
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
  
   return (
     <div className="event-guest">guest
+    <button onClick={()=>{navigate('/login')}} >login</button>
             {/* <div className={styles.banner}>
               <img src={event.banner.url} alt="" />
             </div>
@@ -20,7 +22,7 @@ function GuestEventDetails() {
             <div className={styles.status}>{event.status}</div>
             <button onClick={()=>{navigate('/login')}}>Login</button> */}
           </div>
-  );
+ );
 }
 
 export default GuestEventDetails;

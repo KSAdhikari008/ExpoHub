@@ -39,7 +39,7 @@ async function registerUser(req,res){
         res.cookie('token_ExpoHub',token,{
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "none",
+            sameSite: process.env.NODE_ENV === "production" ? 'none' : "strict",
             maxAge: 1000*60*60*24*7 // 1 week
         });
         
@@ -94,7 +94,7 @@ async function loginUser(req,res){
         res.cookie('token_ExpoHub',token,{
             httpOnly: true, 
             secure: process.env.NODE_ENV === "production",
-            sameSite: "none",
+            sameSite: process.env.NODE_ENV === "production" ? 'none' : "strict",
             maxAge: 1000*60*60*24*7 // 1 week
         });
 
@@ -115,7 +115,7 @@ async function logoutUser(req, res) {
         res.clearCookie("token_ExpoHub",{ // providing the cofiges as well
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "none"
+            sameSite: process.env.NODE_ENV === "production" ? 'none' : "strict"
         });
 
         return res.status(200).json({
