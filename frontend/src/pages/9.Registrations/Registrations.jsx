@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Registration() {
+function Registrations() {
 
   const [isVisitor, setIsVisitor] = useState();
   const navigate = useNavigate();
@@ -34,4 +34,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default Registrations;

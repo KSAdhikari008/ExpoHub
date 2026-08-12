@@ -1,0 +1,11 @@
+/* make the registartion card overlay over the eventDetails card */
+.registration {
+    /* your styles here */
+    height: 90vh;  
+    width: 90vw;
+    z-index: 1000; /* Ensure it's on top of other elements */
+    position: fixed; /* Use fixed positioning to overlay */
+    top: 30px; /* Position it at the top of the viewport */
+    left: 70px; /* Position it at the left of the viewport */
+    background-color: beige;
+}
