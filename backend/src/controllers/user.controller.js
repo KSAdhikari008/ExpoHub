@@ -1,3 +1,4 @@
+import { matchedData } from "express-validator";
 import { User } from "../models/user.model.js";
 import jwt from 'jsonwebtoken'
 
@@ -36,7 +37,9 @@ async function getUsers(req,res) {
 async function getUserById(req,res){
     try{
 
-        const user = await User.findById(req.params.userId);
+        const {userId} = matchedData(req);
+
+        const user = await User.findById(userId);
         res.status(200).json({
             message: "User fetched.",
             user: user       

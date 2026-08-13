@@ -7,34 +7,48 @@ function VisitorEventDetails({eventId}) {
 
   
   const [event, setEvent] = useState();
-  const [regCard, setRegCard] = useState();
+  const [registration, setRegistration] = useState();
   const [overlay, setOverlay] = useState(false);
-
+  const [isRegistered, setIsRegistered] = useState(false);
   
 
   useEffect(()=>{
   
     async function getEvent() {
+      try{
 
-      const response = await axios.get(`/api/events/${eventId}`);
-      setEvent(response.data.event); 
+        // > Get Event.
+        const response = await axios.get(`/api/events/${eventId}`);
+        setEvent(response.data.event); 
+        
+        // > CHECK IF ALREADY REGISTERD.
+        const regRes = await axios.get(`/api/registrations/${eventId}`);
+        setRegistration(regRes.data.registration)
+        setIsRegistered(true);
+
+      }catch(err){
+        
+        if(err.response){          
+          // > Only alert if res comes from events api call.
+          if(err.response.data.message !== 'Registration not found'){
+            alert(err.response.data.message);
+          }
+        }else{
+          console.log(err.message);
+        }
+      }
     }
-
     getEvent()
-  
   },[eventId]);
 
   async function registerToEvent(){
     try{
+
+      // > CREATE REGISTRATION
       const response = await axios.post(`/api/registrations/${eventId}`);
-      // navigate(`/registration/${response.data.registration._id}`);
-      console.log(response.data.registration)
-
-      const res = await axios.get(`/api/registrations/${response.data.registration._id}`);
-      // console.log(res.data);
-      setRegCard(res.data.registration);
+      setRegistration(response.data.registration);
+      setIsRegistered(true);
       setOverlay(true);
-
     }catch(err){
       if(err.response){
         alert(err.response.data.message);
@@ -44,9 +58,6 @@ function VisitorEventDetails({eventId}) {
     }
   }
 
-  async function unRegisterToEvent(){
-
-  }
  
   return (
   event && 
@@ -60,9 +71,11 @@ function VisitorEventDetails({eventId}) {
         <div className={styles.date}>{event.startDate}</div>
         <div className={styles.date}>{event.endDate}</div>
         <div className={styles.status}>{event.status}</div>
-        <button onClick={registerToEvent}>Register</button> 
-        <button onClick={unRegisterToEvent}>Unregister</button> 
-        {overlay && <Registration registration={regCard} setOverlay={setOverlay}/>}
+        {isRegistered 
+            ? <button onClick={()=>{setOverlay(true)}}>View Registration details</button> 
+            : <button onClick={registerToEvent}>Register</button> 
+        }
+        {overlay && <Registration registration={registration} setOverlay={setOverlay} setIsRegistered={setIsRegistered}/>}
     </div>
 );
 }

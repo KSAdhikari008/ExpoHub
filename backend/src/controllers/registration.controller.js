@@ -33,9 +33,12 @@ async function getRegistration(req,res) {
 
     try{
 
-        const {registrationId} = matchedData(req);
+        const {eventId} = matchedData(req);
         
-        const reg = await Registration.findById(registrationId);
+        const reg = await Registration.findOne({
+            event: eventId,
+            visitor: req.user.id
+        });
 
         if(!reg){
             return res.status(404).json({
@@ -61,7 +64,15 @@ async function registerToEvent(req,res){
 
         const {id} = req.user;
         const {eventId} = matchedData(req);
-        
+
+        // check if event exists
+        const event = await Event.findById(eventId);
+        if(!event){
+            return res.status(404).json({
+                message: "Event not found"
+            })
+        }
+
         const existing = await Registration.findOne({
             visitor: id,
             event: eventId
@@ -93,5 +104,32 @@ async function registerToEvent(req,res){
 
 }
 
+async function deleteRegistration(req,res){
 
-export { getRegistrations, getRegistration, registerToEvent};
+    try{
+        const {registrationId} = matchedData(req);
+        // > only the logged in user can delete, protects from others deleting the resource.
+        const registration = await Registration.findOne({
+          _id: registrationId,
+          visitor: req.user.id,
+        });
+
+        if(!registration){
+            return res.status(404).json({
+                message: "Registration not found"
+            })
+        }
+
+        await Registration.findByIdAndDelete(registrationId);
+
+        res.status(200).json({
+            message: "Registration deleted successfully"
+        })
+    }catch(err){
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
+
+export { getRegistrations, getRegistration, registerToEvent, deleteRegistration };

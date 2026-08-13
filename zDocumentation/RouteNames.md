@@ -10,6 +10,7 @@ POST /booking/:boothId   -> books booth for exhibitior. (exhibitor)
 REGISDTRATION api's - /api/registrations:-
 
 GET /             -> gets all registrations of a user. (admin, visitor)
+GET /             -> get reg of user by eventId and id in token. (visitor)
 POST /:eventId    -> registers a user for an event. (visitor)
 
 

@@ -23,6 +23,7 @@ function EventDetails() {
       }catch(err){
         if(err.response){
           console.log(err.response.data.message);
+          // setRole('Guest');
         }else{
           console.log(err.message);
         }
