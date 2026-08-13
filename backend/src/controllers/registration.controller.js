@@ -1,5 +1,7 @@
 import { matchedData } from 'express-validator';
 import { Registration } from '../models/registration.model.js';
+import { Event } from '../models/event.model.js';
+
 
 
 async function getRegistrations(req,res){
