@@ -1,11 +1,169 @@
 /* make the registartion card overlay over the eventDetails card */
-.registration {
+
+.overlay{
     /* your styles here */
-    height: 90vh;  
-    width: 90vw;
+    /* height: 27rem;   */
+    width: 50rem;
     z-index: 1000; /* Ensure it's on top of other elements */
     position: fixed; /* Use fixed positioning to overlay */
-    top: 30px; /* Position it at the top of the viewport */
-    left: 70px; /* Position it at the left of the viewport */
-    background-color: beige;
+    top: 50%; /* Position it at the top of the viewport */
+    left: 50%; /* Position it at the left of the viewport */
+    transform: translate(-50%,-50%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.registration {
+    width: 100%;
+    background-color: rgb(240, 255, 240);
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.315);
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    position: relative;
+}
+
+.cardHeading{
+    /* text-align: center; */
+    width: 92%;
+    margin: 0;
+    padding: 0;
+    color: rgb(2, 101, 2);
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* height: 100px; */
+    /* background-color: blue; */
+}
+
+.eventDetails{
+    height: 300px;
+    width: 100%;
+    background-color: rgb(199, 255, 199);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.450);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.326);
+}
+
+.banner{
+    height: 90%;
+    width: 55%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.527);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.326);
+}
+
+.banner img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.details{
+    /* border: 1px solid grey; */
+    height: 90%;
+    width: 40%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding: 10px 10px;
+    box-sizing: border-box;
+
+}
+
+.details .titleContainer{
+    text-align: center;
+    font-size: 23px;
+    /* height: 60px; */
+    /* line-height: 60px; */
+}
+
+.title{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.desc {
+    height: 50%;
+    line-height: 1.2;                  /* Set the element's height to 45% of its parent */
+    display: -webkit-box;         /* Enable the box layout required for line clamping */
+    -webkit-box-orient: vertical; /* Arrange the content vertically */
+    -webkit-line-clamp: 6;        /* Limit the text to a maximum of 6 lines */
+    line-clamp: 6;                /* Standard property for limiting text to 6 lines */
+    overflow: hidden;              /* Hide any text that exceeds the 6-line limit */
+    font-style: italic;
+}
+
+.details span{
+    font-weight: bold;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.visitorDetails{
+    border: 1px solid black;
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0px 27px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.450);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.326);
+    background-color: rgb(199, 255, 199);
+}
+
+.visitorDetails div{
+    line-height: 3rem;
+    font-size: 18px;
+}
+.visitorDetails div span{
+    font-size: 18px;
+    font-weight:600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.unregisterBtn{
+    background-color: rgb(183, 73, 73);
+    color: white;
+    padding: 7px 10px;
+    font-size: 17px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.358);
+    border: 1px solid rgba(0, 0, 0, 0.689);
+    letter-spacing: 1px;
+
+    &:hover{
+        cursor: pointer;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.679);
+    }
+}
+
+.overlayBtn{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+}
+
+.overlayBtn:hover{
+    cursor: pointer;
+    font-size: 27px;
 }

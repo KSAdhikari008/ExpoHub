@@ -40,7 +40,7 @@ async function getRegistration(req,res) {
         const reg = await Registration.findOne({
             event: eventId,
             visitor: req.user.id
-        });
+        }).populate('event').populate('visitor','username');
 
         if(!reg){
             return res.status(404).json({
@@ -88,14 +88,17 @@ async function registerToEvent(req,res){
 
         // above is a friendly check may be passed in a race condition.
         // Hence, a unique index is given in the Registration schema.
-        const regsitration = await Registration.create({
+        const registration = await Registration.create({
             visitor: id,
             event: eventId
         })
 
+        await registration.populate('event');
+        await registration.populate('visitor', 'username');
+
         res.status(201).json({
             message: "Registered to event",
-            registration: regsitration
+            registration: registration
         })
 
     }catch(err){
@@ -125,7 +128,7 @@ async function deleteRegistration(req,res){
         await Registration.findByIdAndDelete(registrationId);
 
         res.status(200).json({
-            message: "Registration deleted successfully"
+            message: "Unregistered successfully"
         })
     }catch(err){
         res.status(500).json({
