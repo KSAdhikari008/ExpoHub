@@ -1,9 +1,10 @@
-.light{
-    --bg: white;
-    --bg-contrast-matte-1: #3356be;
-    --bg-contrast-1: #0821ae;
+body,:root,html{
+    --txt-color:  #ebf4ff;
+    --txt-color-accent: #5249fe;
 }
 
-.dark{
-    --bg: #00072d;
+.light-mode{
+    --txt-color:  #0f172a;
+    --bg-contrast-matte-1: #3356be;
+    --bg-contrast-1: #0821ae;
 }

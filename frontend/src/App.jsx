@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "react";
 import Login from "./pages/1.login/Login";
 import Register from "./pages/2.Registration/Register";
 import Home from "./pages/3.Home/Home";
@@ -10,29 +9,25 @@ import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import Registrations from "./pages/9.Registrations/Registrations";
 import Registration from "./pages/9.Registrations/Registration";
-function App() {
- 
-//  const [theme, setTheme] = useState('light');
+import {ThemeProvider} from "./context/ThemeContext";
 
-//  useEffect(()=>{
- 
-//    document.body.className = theme;
- 
-//  },[theme]);
+function App() {
 
   return (
-    <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route path="/login" element={<Login/>} /> 
-      <Route path="/register" element={<Register/>} />
-      <Route path="/event/:eventId" element={<EventDetails/>} />
-      <Route path="/registrations" element={<Registrations/>} />
-      <Route path="/registration/:registrationId" element={<Registration/>} />
-      <Route path="/booking/:boothId" element={<Booking/>} />
-      <Route path="/event/:eventId/edit" element={<EditEvent/>} />
-      <Route path="/unauthorized" element={<Unauthorized/>} />
-      <Route path="*" element={<NotFound/>} />
-    </Routes>
+    <ThemeProvider>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/login" element={<Login/>} /> 
+        <Route path="/register" element={<Register/>} />
+        <Route path="/event/:eventId" element={<EventDetails/>} />
+        <Route path="/registrations" element={<Registrations/>} />
+        <Route path="/registration/:registrationId" element={<Registration/>} />
+        <Route path="/booking/:boothId" element={<Booking/>} />
+        <Route path="/event/:eventId/edit" element={<EditEvent/>} />
+        <Route path="/unauthorized" element={<Unauthorized/>} />
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
