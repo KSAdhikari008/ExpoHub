@@ -9,11 +9,11 @@ function Navbar() {
     const {isUser, setIsUser} = useIsUser();
     const navigate = useNavigate();
 
-      function logoutUser() {
+      function toggleLog() {
         try {
           axios.post("/api/auth/logout");
-          setIsUser(false);
           navigate("/login");
+          setIsUser(false);
         } catch (err) {
           console.log(err.response.data.message);
         }
@@ -27,7 +27,9 @@ function Navbar() {
         </button>
 
         <div className="header-actions">
-          <button type="button" className="dashboard-btn">Dashboard</button>
+          {isUser && (
+            <button type="button" className="dashboard-btn">Dashboard</button>
+          )}
           <button
             type="button"
             className="theme-toggle-btn"
@@ -35,9 +37,9 @@ function Navbar() {
           >
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
-          {isUser && (
-            <button type="button" className="logout-btn" onClick={logoutUser}>Logout</button>
-          )}
+            <button type="button" className="logout-btn" onClick={toggleLog}>
+              {isUser ? "Logout" : "Login"}
+            </button>
         </div>
       </header>
   );

@@ -2,9 +2,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import heroImage from "./../../assets/registerHero3.jpg";
 import styles from "./Register.module.css";
 import axios from 'axios'
+import { useIsUser } from "../../context/UserHook";
 
 function Register() {
 
+  const {setIsUser} = useIsUser();
   const navigate = useNavigate();
 
   async function handleSubmit(e){
@@ -15,6 +17,7 @@ function Register() {
     
     try{
       await axios.post('/api/auth/register',jsonData,);
+      setIsUser(true);
       navigate('/');
     }catch(err){
       //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.
