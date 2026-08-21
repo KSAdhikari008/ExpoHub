@@ -4,7 +4,7 @@ import './Home.css'
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeHook";
 import { formatEventDate } from "../../utils/formatDate";
-import Navbar from "../../components/navbar/Navbar";
+import Navbar from "../../components/header/Navbar";
 
 function Home() {
  

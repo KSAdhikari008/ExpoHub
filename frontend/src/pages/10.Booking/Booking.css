@@ -1,0 +1,30 @@
+.overlay{
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000; 
+    position: fixed;
+    top: 0; 
+    left: 0;
+    background-color: rgba(2, 2, 2, 0.600);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+}
+
+.booking-container {
+    width: 50rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(240, 255, 240);
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.315);
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    position: relative;
+}

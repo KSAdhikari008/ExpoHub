@@ -7,7 +7,7 @@ import AdminEventDetails from '../../components/AdminEventDetails';
 import GuestEventDetails from '../../components/GuestEventDetails';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeHook';
-import Navbar from '../../components/navbar/Navbar';
+import Navbar from '../../components/header/Navbar';
 
 function EventDetails() {
 
@@ -46,7 +46,7 @@ function EventDetails() {
         {role === "Visitor" 
           ? <VisitorEventDetails eventId={eventId}/>
           : role === "Exhibitor" 
-            ? <ExhibitorEventDetails/>
+            ? <ExhibitorEventDetails eventId={eventId}/>
             : role === "Admin" 
               ? <AdminEventDetails/>
               : <GuestEventDetails/>

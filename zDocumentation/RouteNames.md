@@ -1,13 +1,13 @@
 
 Booth api's - /api/booths:-
 
-GET /:eventId            -> gets all booths in a event. (admin) **exhibitor may access as well if required check later**
+GET /:eventId            -> gets all booths in a event. (admin, exhibitor)
 POST /                   -> creates booth for an event. (admin) *exhibitor and status value is given during booth booking not when creating, till then defualt val is accepted.
 DELETE /:boothId         -> delets the booth. (admin).
 POST /booking/:boothId   -> books booth for exhibitior. (exhibitor) 
 
 
-REGISDTRATION api's - /api/registrations:-
+REGISTRATION api's - /api/registrations:-
 
 GET /             -> gets all registrations of a user. (admin, visitor)
 GET /             -> get reg of user by eventId and id in token. (visitor)

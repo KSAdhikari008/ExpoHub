@@ -14,7 +14,7 @@ export function UserContextProvider({children}) {
         // const response = await axios.get('/api/events');
         // setEvents(response.data.events);
         const authRes = await axios.get('/api/auth/me');
-        setIsUser(authRes.data.role);
+        setIsUser(authRes.data);
       }catch(err){
         if(err.response){
             // if the error is not due to authentication, log it
