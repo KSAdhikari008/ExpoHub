@@ -10,11 +10,13 @@ import NotFound from "./pages/NotFound";
 import Registrations from "./pages/9.Registrations/Registrations";
 import Registration from "./pages/9.Registrations/Registration";
 import {ThemeProvider} from "./context/ThemeContext";
+import { UserContextProvider } from "./context/UserContext";
 
 function App() {
 
   return (
     <ThemeProvider>
+      <UserContextProvider>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} /> 
@@ -27,6 +29,7 @@ function App() {
         <Route path="/unauthorized" element={<Unauthorized/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
+      </UserContextProvider>
     </ThemeProvider>
   );
 }

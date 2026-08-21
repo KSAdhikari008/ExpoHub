@@ -9,7 +9,7 @@
     box-shadow: 0 20px 45px rgba(15, 23, 42, 0.26);
 }
 
-.lightMode {
+.lightMod {
     background: rgba(255, 255, 255, 0.8);
     border-color: rgba(148, 163, 184, 0.25);
     box-shadow: 0 20px 45px rgba(148, 163, 184, 0.15);
@@ -41,7 +41,7 @@
     color: #f8fafc;
 }
 
-.lightMode .title {
+.lightMod .title {
     color: #0f172a;
 }
 
@@ -51,7 +51,7 @@
     font-size: 1rem;
 }
 
-.lightMode .description {
+.lightMod .description {
     color: #334155;
 }
 
@@ -74,8 +74,8 @@
     color: #e2e8f0;
 }
 
-.lightMode .metaItem,
-.lightMode .dateItem {
+.lightMod .metaItem,
+.lightMod .dateItem {
     background: rgba(15, 23, 42, 0.03);
     border-color: rgba(15, 23, 42, 0.08);
     color: #0f172a;

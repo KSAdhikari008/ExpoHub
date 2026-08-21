@@ -1,10 +1,15 @@
 body,:root,html{
     --txt-color:  #ebf4ff;
+    --color-heading-1: whitesmoke;
+    --color-content-1: rgb(232, 232, 232);
     --txt-color-accent: #5249fe;
 }
 
 .light-mode{
     --txt-color:  #0f172a;
+    --color-heading-1: rgb(48, 48, 48);
+    --color-content-1: rgb(68, 68, 68);
+    --color-content-2: whitesmoke;
     --bg-contrast-matte-1: #3356be;
     --bg-contrast-1: #0821ae;
 }

@@ -32,37 +32,41 @@ function Login() {
     <div className={styles.loginPage}>
       <div className={styles.header}>
         <div className={styles["left-section"]}>
-          <h1>EXPOHUB</h1>
+          <span className={styles.brandMark}>E</span>
+          <h1>EXPO<span>HUB</span></h1>
         </div>
         <div className={styles["right-section"]}>
-          <NavLink to="/register" className={styles["register"]}>
-            Register
+          <span>New here?</span>
+          <NavLink to="/register" className={styles.register}>
+            Create account
           </NavLink>
         </div>
       </div>
       <div className={styles.main}>
         <div className={styles.displayPanel}>
-          <img src={heroImage} alt="" />
+          <img src={heroImage} alt="Visitors exploring an exhibition hall" />
+          <div className={styles.imageShade} />
           <div className={styles.heroSection}>
-            <h1>Connecting people.</h1>
-            <p>Discover exhibitions, connect with exhibitors...</p>
+            <p className={styles.eyebrow}>THE EXHIBITION COMMUNITY</p>
+            <h2>Where ideas<br />meet opportunity.</h2>
+            <p>Discover exhibitions, connect with exhibitors, and make your next visit count.</p>
           </div>
         </div>
-        <div className={`${styles.loginPanel} flex justify-center items-center `}>
-          <div className={`${styles['login-form-container']} border-4 border-blue-600 flex flex-col justify-center items-center h-9/10 w-9/10 p-7  `}>
-            <div className={`${styles.title} border-2 border-blue-400 basis-1/10`}>
-              <h3 className="text-3xl font-medium  ">Welcome Back</h3>
+        <div className={styles.loginPanel}>
+          <div className={styles.loginFormContainer}>
+            <div className={styles.title}>
+              <p className={styles.formEyebrow}>WELCOME BACK</p>
+              <h3>Sign in to ExpoHub</h3>
               <p>Sign in to continue to your account</p>
             </div>
-            <form onSubmit={handleSubmit} className={`${styles["login-form"]} border-2 border-blue-400 basis-9/10 flex flex-col justify-center items-center w-8/10  `}>
-              <label htmlFor="identifier" className="text-left w-2/4 ">Enter email or username</label>
+            <form onSubmit={handleSubmit} className={styles.loginForm}>
+              <label htmlFor="identifier">Email or username</label>
               <input type="text" name="identifier" id="identifier" placeholder="email or username" required 
-                      className="border rounded mt-2 mb-7 pl-7 pb-1 h-1/12 w-2/4" />
-              <label htmlFor="password" className="w-2/4 text-left">Password</label>
+                      />
+              <label htmlFor="password">Password</label>
               <input type="password" name="password" id="password" placeholder="Enter your password" required 
-                      className="border rounded mt-2 mb-7 pl-7 pb-1 h-1/12 w-2/4" />
-              <button type="submit" 
-                      className="border w-16 h-7 rounded">Login</button>
+                      />
+              <button type="submit">Login <span aria-hidden="true">→</span></button>
             </form>
           </div>
         </div>

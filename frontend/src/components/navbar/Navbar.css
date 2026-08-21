@@ -1,0 +1,140 @@
+.home-header {
+    max-width: 100%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(15, 23, 42, 0.72);
+    border-radius: 18px;
+}
+
+.light-mode .home-header {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(148, 163, 184, 0.25);
+    box-shadow: 0 20px 40px rgba(148, 163, 184, 0.2);
+}
+
+.brand-block {
+    border:none;
+    background-color: initial;
+    color:inherit; /* to pass down the homepage color to brand name*/
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    gap: 3px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.brand-block:hover{
+    cursor: pointer;
+}
+
+.brand-mark,
+.brand-name {
+    font-size: clamp(1.15rem, 1vw + 0.8rem, 1.8rem);
+}
+
+.brand-mark {
+    color: var(--txt-color-accent);
+}
+
+.brand-name {
+    color:inherit;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.dashboard-btn,
+.logout-btn,
+.theme-toggle-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 0.8rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;/* change when hovered*/
+}
+
+.dashboard-btn {
+    background: var(--txt-color-accent);
+    color: #fff;
+    box-shadow: 0 14px 28px rgba(79, 70, 229, 0.35);
+}
+
+.theme-toggle-btn {
+    background: rgba(148, 163, 184, 0.12);
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.logout-btn {
+    background: rgba(148, 163, 184, 0.12);
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.light-mode .theme-toggle-btn,
+.light-mode .logout-btn {
+    background: rgba(15, 23, 42, 0.05);
+    color: #0f172a;
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+.dashboard-btn:hover,
+.logout-btn:hover,
+.theme-toggle-btn:hover {
+    transform: scale(1.03);
+}
+
+
+@media (max-width: 820px) {
+    /* .home-page {
+        padding: 18px 18px 42px;
+    } */
+
+    /* .hero-section {
+        flex-direction: column;
+    } */
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+        gap: min(14px,1vw);
+    }
+
+    .header-actions button{
+        font-size: 0.90rem;
+        padding: 0.5rem 0.9rem;
+    }
+
+
+}
+
+@media (max-width: 520px) {
+    /* .hero-panel {
+        flex-direction: column;
+    } */
+
+    .dashboard-btn,
+    .logout-btn {
+        width: 100%;
+    }
+    .home-header {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

@@ -12,105 +12,9 @@
 
 .home-page.light-mode {
     background:
-        linear-gradient(135deg, #d5ffeb 0%, #e4edff 35%, #afd0fa 100%);
-    color: var(--txt-color);
+    linear-gradient(135deg, #d5ffeb 0%, #e4edff 35%, #afd0fa 100%);
 }
 
-.home-header {
-    max-width: 100%;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 20px;
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    background: rgba(15, 23, 42, 0.72);
-    border-radius: 18px;
-}
-
-.light-mode .home-header {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(148, 163, 184, 0.25);
-    box-shadow: 0 20px 40px rgba(148, 163, 184, 0.2);
-}
-
-.brand-block {
-    border:none;
-    background-color: initial;
-    color:inherit; /* to pass down the homepage color to brand name*/
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    gap: 3px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-}
-
-.brand-block:hover{
-    cursor: pointer;
-}
-
-.brand-mark,
-.brand-name {
-    font-size: clamp(1.15rem, 1vw + 0.8rem, 1.8rem);
-}
-
-.brand-mark {
-    color: var(--txt-color-accent);
-}
-
-.brand-name {
-    color:inherit;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.dashboard-btn,
-.logout-btn,
-.theme-toggle-btn {
-    border: none;
-    border-radius: 999px;
-    padding: 0.8rem 1.4rem;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;/* change when hovered*/
-}
-
-.dashboard-btn {
-    background: linear-gradient(135deg, #8b5cf6,  var(--txt-color-accent));
-    color: #fff;
-    box-shadow: 0 14px 28px rgba(79, 70, 229, 0.35);
-}
-
-.theme-toggle-btn {
-    background: rgba(148, 163, 184, 0.12);
-    color: #f8fafc;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-}
-
-.logout-btn {
-    background: rgba(148, 163, 184, 0.12);
-    color: #f8fafc;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-}
-
-.light-mode .theme-toggle-btn,
-.light-mode .logout-btn {
-    background: rgba(15, 23, 42, 0.05);
-    color: #0f172a;
-    border-color: rgba(15, 23, 42, 0.12);
-}
-
-.dashboard-btn:hover,
-.logout-btn:hover,
-.theme-toggle-btn:hover {
-    transform: scale(1.03);
-}
 
 .home-main {
     max-width: 1200px;
@@ -147,7 +51,7 @@
 
 .hero-copy h1 {
     margin: 0 0 16px;
-    font-size: clamp(2.6rem, 4vw, 4.4rem);
+    font-size: clamp(2.2rem, 4vw, 4.4rem);
     line-height: 1.05;
     letter-spacing: -0.05em;
     max-width: 640px;
@@ -155,7 +59,7 @@
 
 .hero-copy p {
     margin: 0;
-    color: #cbd5e1;
+    color: var(--color-content-1);
     max-width: 620px;
     line-height: 1.7;
     font-size: 1.06rem;
@@ -207,7 +111,7 @@
     padding-left: 6px;
     font-size: 1.15rem;
     font-weight: 700;
-    color: #cbd5e1;
+    color: var(--color-heading-1);
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
@@ -312,7 +216,7 @@
 
 .dates {
     margin-top: auto;
-    color: #bfdbfe;
+    color: var(--color-content-2);
     flex-wrap: wrap;
     display: grid;
     gap: 8px;
@@ -320,12 +224,7 @@
     line-height: 1.5;
 }
 
-.light-mode .dates {
-    color: #334155;
-}
-
 .dates strong {
-    color: inherit;
     font-weight: 700;
 }
 
@@ -338,15 +237,18 @@
         flex-direction: column;
     }
 
-    .home-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .header-actions {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: flex-end;
+        gap: min(14px,1vw);
     }
+
+    .header-actions button{
+        font-size: 0.90rem;
+        padding: 0.5rem 0.9rem;
+    }
+
+
 }
 
 @media (max-width: 520px) {
@@ -357,6 +259,11 @@
     .dashboard-btn,
     .logout-btn {
         width: 100%;
+    }
+    .home-header {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
     }
 
     .header-actions {

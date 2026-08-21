@@ -1,70 +1,36 @@
-.loginPage{
-    height: 100dvh; 
-    /* Dynamic Viewport Height updates as mobile browser UI (address/navigation bars) appears or disappears. */
-}
-.header{
-    padding: 0px 21px;
-    height: 80px;
-    background-color: var(--bg);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 5px solid var(--bg-contrast-1);
-}
-    .left-section{
-        font-size: 35px;
-        font-weight: 600;
-    }
-    .right-section{
-        padding: 5px 15px;
-        text-align: center;
-        font-size: 18px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--color-blue-600);        
-        color: white;
-        border-radius: 8px;
-    }
+.loginPage { --ink: #14213d; --muted: #68738a; --line: #dfe4ec; --accent: #ed6a4d; min-height: 100dvh; background: #f7f8fa; color: var(--ink); }
+.header { height: 76px; padding: 0 5vw; display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid var(--line); }
+.left-section, .right-section { display: flex; align-items: center; }
+.left-section { gap: 10px; }
+.left-section h1 { margin: 0; font-size: 1.1rem; letter-spacing: .12em; font-weight: 800; }
+.left-section h1 span { color: var(--accent); }
+.brandMark { display: grid; place-items: center; width: 30px; height: 30px; background: var(--ink); color: #fff; font-weight: 800; font-size: .9rem; border-radius: 50%; }
+.right-section { gap: 14px; color: var(--muted); font-size: .82rem; }
+.register { padding: 10px 17px; color: #fff; background: var(--ink); border-radius: 5px; text-decoration: none; font-weight: 700; transition: background .2s ease, transform .2s ease; }
+.register:hover { background: var(--accent); transform: translateY(-1px); }
     
-.main{
-    height: calc(100vh - 80px); /* page height - header height */
-    display: flex;
-    flex-flow: row nowrap;
-}
-    .displayPanel{
-        flex-basis:40%;
-        position: relative;
-    }
-        .displayPanel img{
-            display: block;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-        .heroSection{
-            position: absolute;
-            top:0;
-            color:white;
-            padding: 15px 15px;
-        }
-            .heroSection h1{
-                margin-bottom: 5px;
-                color: rgb(252, 205, 111);
-                line-height: clamp(3rem, 3vw + 1rem, 3vw + 1rem);
-                font-size: 45px;
-                font-weight: 600;
-                text-shadow: 3px 3px 5px black;
-            }
-            .heroSection p{
-                line-height: clamp(2rem, 2vw, 4vw);
-                font-size: 26px;
-                font-weight: 500;
-                text-shadow: 4px 4px 7px rgb(0, 0, 0);
-            }
+.main { min-height: calc(100dvh - 76px); display: flex; }
+    .displayPanel { position: relative; flex: 0 0 43%; min-height: 600px; overflow: hidden; background: var(--ink); }
+.displayPanel img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.imageShade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,33,61,.12), rgba(20,33,61,.86)); }
+.heroSection { position: absolute; left: clamp(24px, 5vw, 76px); right: 28px; bottom: clamp(34px, 8vw, 100px); color: #fff; }
+.eyebrow, .formEyebrow { margin: 0 0 14px; color: #ffb29e; font-size: .7rem; letter-spacing: .15em; font-weight: 800; }
+.heroSection h2 { margin: 0 0 18px; font-family: Georgia, serif; font-size: clamp(2.5rem, 4.2vw, 4.6rem); line-height: .98; letter-spacing: -.03em; font-weight: 500; }
+.heroSection p:last-child { max-width: 350px; margin: 0; color: rgba(255,255,255,.8); line-height: 1.6; font-size: .98rem; }
 
-    .loginPanel{
-        flex-basis: 60%;
-    }
+.loginPanel { flex: 1; display: flex; align-items: center; justify-content: center; padding: 44px 6vw; }
+.loginFormContainer { width: min(100%, 455px); padding: clamp(28px, 5vw, 58px); background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 55px rgba(20,33,61,.08); }
+.title { margin-bottom: 34px; }
+.title h3 { margin: 0 0 9px; font-family: Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 500; }
+.title > p:last-child { margin: 0; color: var(--muted); font-size: .9rem; }
+.formEyebrow { margin-bottom: 11px; color: var(--accent); }
+.loginForm { display: flex; flex-direction: column; }
+.loginForm label { margin: 0 0 8px; font-size: .82rem; font-weight: 700; }
+.loginForm input { width: 100%; box-sizing: border-box; height: 49px; margin: 0 0 21px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: #fbfcfd; font: inherit; outline: none; }
+.loginForm input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(237,106,77,.14); }
+.loginForm button { height: 49px; margin-top: 7px; border: 0; border-radius: 4px; color: #fff; background: var(--accent); font: inherit; font-weight: 800; cursor: pointer; }
+.loginForm button:hover { background: #d8553c; }
+.loginForm button span { margin-left: 8px; font-size: 1.1rem; }
     
 @media (max-width: 814px){
 
@@ -157,3 +123,19 @@
 
 
 }
+
+/* Keep the refined layout authoritative over the legacy responsive rules above. */
+.loginPage .header { height: 76px; padding: 0 5vw; background: #fff; border-bottom: 1px solid var(--line); }
+.loginPage .left-section, .loginPage .right-section { display: flex; align-items: center; }
+.loginPage .left-section { gap: 10px; }
+.loginPage .left-section h1 { margin: 0; font-size: 1.1rem; letter-spacing: .12em; font-weight: 800; }
+.loginPage .left-section h1 span { color: var(--accent); }
+.loginPage .brandMark { display: grid; place-items: center; width: 30px; height: 30px; background: var(--ink); color: #fff; font-weight: 800; font-size: .9rem; border-radius: 50%; }
+.loginPage .right-section { gap: 14px; color: var(--muted); font-size: .82rem; }
+.loginPage .main { min-height: calc(100dvh - 76px); height: auto; display: flex; flex-flow: row nowrap; }
+.loginPage .displayPanel { position: relative; flex: 0 0 43%; min-height: 600px; overflow: hidden; }
+.loginPage .displayPanel img { height: 100%; }
+.loginPage .heroSection { top: auto; left: clamp(24px, 5vw, 76px); bottom: clamp(34px, 8vw, 100px); padding: 0; }
+.loginPage .loginPanel { flex: 1; padding: 44px 6vw; }
+@media (max-width: 814px) { .loginPage .header { height: 64px; padding: 0 20px; } .loginPage .right-section > span { display: none; } .loginPage .main { min-height: calc(100dvh - 64px); flex-flow: column nowrap; } .loginPage .displayPanel { flex: 0 0 270px; min-height: 270px; } .loginPage .displayPanel img { height: 100%; } .loginPage .heroSection { left: 24px; bottom: 28px; top: auto; } .loginPage .loginPanel { flex: 1; padding: 34px 20px 48px; } }
+@media (max-width: 400px) { .loginPage .header { height: 58px; padding: 0 14px; } .loginPage .left-section h1 { font-size: .95rem; } .loginPage .brandMark { width: 26px; height: 26px; } .loginPage .register { padding: 8px 12px; font-size: .76rem; } .loginPage .main { min-height: calc(100dvh - 58px); } .loginPage .displayPanel { flex-basis: 235px; min-height: 235px; } .loginPage .heroSection { left: 18px; bottom: 22px; } .loginPage .loginPanel { padding: 24px 14px 34px; } .loginPage .loginFormContainer { padding: 25px 20px; } }

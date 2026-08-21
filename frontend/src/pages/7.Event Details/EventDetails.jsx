@@ -7,10 +7,11 @@ import AdminEventDetails from '../../components/AdminEventDetails';
 import GuestEventDetails from '../../components/GuestEventDetails';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeHook';
+import Navbar from '../../components/navbar/Navbar';
 
 function EventDetails() {
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [role, setRole] = useState('Guest');
   
   const {eventId} = useParams();
@@ -39,24 +40,7 @@ function EventDetails() {
 
   return (
     <div className={`${styles.page} ${theme === 'light' ? styles.lightMode : ''}`}>
-      <header className={styles.topbar}>
-        <div className={styles.brandBlock}>
-          <span className={styles.brandMark}>EXPO</span>
-          <span className={styles.brandName}>HUB</span>
-        </div>
-
-        <div className={styles.headerActions}>
-          <button type="button" className={styles.dashboardBtn}>Dashboard</button>
-          <button
-            type="button"
-            className={styles.themeToggleBtn}
-            onClick={toggleTheme}
-          >
-            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          </button>
-          <button type="button" className={styles.logoutBtn}>Logout</button>
-        </div>
-      </header>
+      <Navbar/>
 
       <main className={styles.content}>
         {role === "Visitor" 

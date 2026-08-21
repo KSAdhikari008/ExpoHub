@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import './Home.css'
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeHook";
 import { formatEventDate } from "../../utils/formatDate";
+import Navbar from "../../components/navbar/Navbar";
 
 function Home() {
  
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [events, setEvents] = useState([]);
-  const [isUser, setIsUser] = useState(false);
+  // const [isUser, setIsUser] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(()=>{
   
@@ -19,8 +20,8 @@ function Home() {
       try{
         const response = await axios.get('/api/events');
         setEvents(response.data.events);
-        const authRes = await axios.get('/api/auth/me');
-        setIsUser(authRes.data.role);
+        // const authRes = await axios.get('/api/auth/me');
+        // setIsUser(authRes.data.role);
       }catch(err){
         if(err.response){
             // if the error is not due to authentication, log it
@@ -37,41 +38,10 @@ function Home() {
   
   },[]);
 
-
-  function logoutUser(){
-    try{
-      axios.post('/api/auth/logout');
-      setIsUser(false);
-      navigate('/login');
-    } catch (err) {
-      console.log(err.response.data.message);
-    }
-  }
-
- 
-
   return (
     <div className={`home-page ${theme === 'light' ? 'light-mode' : ''}`}>
-      <header className="home-header">
-        <button className="brand-block" onClick={()=>{navigate('/')}}>
-          <span className="brand-mark">EXPO</span>
-          <span className="brand-name">HUB</span>
-        </button>
 
-        <div className="header-actions">
-          <button type="button" className="dashboard-btn">Dashboard</button>
-          <button
-            type="button"
-            className="theme-toggle-btn"
-            onClick={toggleTheme}
-          >
-            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          </button>
-          {isUser && (
-            <button type="button" className="logout-btn" onClick={logoutUser}>Logout</button>
-          )}
-        </div>
-      </header>
+      <Navbar/>
 
       <main className="home-main">
         <section className="hero-section">

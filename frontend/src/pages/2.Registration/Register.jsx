@@ -45,54 +45,53 @@ function Register() {
     <div className={styles.registrationPage}>
       <div className={styles.header}>
         <div className={styles["left-section"]}>
-          <h1>EXPOHUB</h1>
+          <span className={styles.brandMark}>E</span>
+          <h1>EXPO<span>HUB</span></h1>
         </div>
         <div className={styles["right-section"]}>
-          <NavLink to="/login" className={styles["login"]}>
+          <span>Already a member?</span>
+          <NavLink to="/login" className={styles.login}>
             Login
           </NavLink>
         </div>
       </div>
       <div className={styles.main}>
         <div className={styles.displayPanel}>
-          <img src={heroImage} alt="" />
+            <img src={heroImage} alt="A busy exhibition event" />
+            <div className={styles.imageShade} />
           <div className={styles.heroSection}>
-            <h1>Connecting people.</h1>
-            <p>Discover exhibitions, connect with exhibitors...</p>
+              <p className={styles.eyebrow}>YOUR NEXT CONNECTION STARTS HERE</p>
+              <h2>Bring your<br />curiosity with you.</h2>
+              <p>One place to find events, meet people, and turn inspiration into action.</p>
           </div>
         </div>
-        <div className={`${styles.registrationPanel} flex justify-center items-center `}>
-          <div className={`${styles['registration-form-container']} border-4 border-blue-600 flex flex-col justify-center items-center h-9/10 w-9/10 p-7  `}>
-            <div className={`${styles.title} border-2 border-blue-400 basis-1/10`}>
-              <h3 className="text-3xl font-medium  ">Welcome Back</h3>
-              <p>Sign in to continue to your account</p>
+          <div className={styles.registrationPanel}>
+            <div className={styles.registrationFormContainer}>
+              <div className={styles.title}>
+                <p className={styles.formEyebrow}>JOIN EXPOHUB</p>
+                <h3>Create your account</h3>
+                <p>Choose how you would like to take part.</p>
             </div>
 
-            <form onSubmit={handleSubmit}  
-                  className={`${styles["registration-form"]} border-2 border-blue-400 basis-9/10 flex flex-col justify-center items-center w-8/10  `}>
-              <label htmlFor="name" className="text-left w-2/4 ">Enter User name:
-              </label>
+              <form onSubmit={handleSubmit} className={styles.registrationForm}>
+                <label htmlFor="name">Username</label>
               <input type="text" name="username" id="name"  required 
-                      className="border rounded mt-2 mb-7 px-4 pb-1 h-1/12 w-2/4" />
-              <label htmlFor="email" className="text-left w-2/4 ">Enter Address
-              </label>
+                  />
+                <label htmlFor="email">Email address</label>
               <input type="email" name="email" id="email" placeholder="you@example.com" required 
-                      className="border rounded mt-2 mb-7 px-7 pb-1 h-1/12 w-2/4" />
-              <label htmlFor="password" className="w-2/4 text-left">Password
-              </label>
+                  />
+                <label htmlFor="password">Password</label>
               <input type="password" name="password" id="password" placeholder="Enter your password" required 
-                      className="border rounded mt-2 mb-7 px-7 pb-1 h-1/12 w-2/4" />
-              <label htmlFor="role" className="w-2/4 text-left">Role
-              </label>
+                  />
+                <label htmlFor="role">I am joining as</label>
               <select name="role" id="role" defaultValue=""  required 
-                      className="border rounded mt-2 mb-7 px-3 pb-1 h-1/12 w-2/4" >
+                  >
                 <option value="" disabled >Select</option>
                 <option value="Visitor">Visitor</option>
                 <option value="Exhibitor">Exhibitor</option>
                 <option value="Admin">Admin</option>
               </select>              
-              <button type="submit"  
-                      className="border w-20 h-8 pb-1 rounded">Register</button>
+                    <button type="submit">Create account <span aria-hidden="true">→</span></button>
             </form>
               {/*Controlled vs Uncontrolled <select>
               Uncontrolled (<select> without a value prop):

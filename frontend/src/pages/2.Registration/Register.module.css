@@ -157,3 +157,38 @@
 
 
 }
+
+/* Refined auth form layout */
+.registrationPage { --ink: #14213d; --muted: #68738a; --line: #dfe4ec; --accent: #ed6a4d; min-height: 100dvh; background: #f7f8fa; color: var(--ink); }
+.registrationPage .header { height: 76px; padding: 0 5vw; background: #fff; border-bottom: 1px solid var(--line); }
+.registrationPage .left-section, .registrationPage .right-section { display: flex; align-items: center; }
+.registrationPage .left-section { gap: 10px; }
+.registrationPage .left-section h1 { margin: 0; font-size: 1.1rem; letter-spacing: .12em; font-weight: 800; }
+.registrationPage .left-section h1 span { color: var(--accent); }
+.registrationPage .brandMark { display: grid; place-items: center; width: 30px; height: 30px; background: var(--ink); color: #fff; font-weight: 800; font-size: .9rem; border-radius: 50%; }
+.registrationPage .right-section { gap: 14px; color: var(--muted); font-size: .82rem; }
+.registrationPage .login { padding: 10px 17px; color: #fff; background: var(--ink); border-radius: 5px; text-decoration: none; font-weight: 700; }
+.registrationPage .login:hover { background: var(--accent); }
+.registrationPage .main { min-height: calc(100dvh - 76px); display: flex; }
+.registrationPage .displayPanel { position: relative; flex: 0 0 38%; min-height: 600px; overflow: hidden; background: var(--ink); }
+.registrationPage .displayPanel img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.registrationPage .imageShade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,33,61,.12), rgba(20,33,61,.86)); }
+.registrationPage .heroSection { position: absolute; left: clamp(24px, 5vw, 76px); right: 28px; bottom: clamp(34px, 8vw, 100px); color: #fff; }
+.registrationPage .eyebrow, .registrationPage .formEyebrow { margin: 0 0 14px; color: #ffb29e; font-size: .7rem; letter-spacing: .15em; font-weight: 800; }
+.registrationPage .heroSection h2 { margin: 0 0 18px; font-family: Georgia, serif; font-size: clamp(2.5rem, 4.2vw, 4.6rem); line-height: .98; font-weight: 500; }
+.registrationPage .heroSection p:last-child { max-width: 350px; margin: 0; color: rgba(255,255,255,.8); line-height: 1.6; font-size: .98rem; }
+.registrationPage .registrationPanel { flex: 1; display: flex; align-items: center; justify-content: center; padding: 28px 5vw; }
+.registrationPage .registrationFormContainer { width: min(100%, 505px); padding: clamp(24px, 3.5vw, 42px) clamp(28px, 5vw, 60px); background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 55px rgba(20,33,61,.08); }
+.registrationPage .title { margin-bottom: 24px; }
+.registrationPage .title h3 { margin: 0 0 8px; font-family: Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 500; }
+.registrationPage .title > p:last-child { margin: 0; color: var(--muted); font-size: .9rem; }
+.registrationPage .formEyebrow { margin-bottom: 10px; color: var(--accent); }
+.registrationPage .registrationForm { display: flex; flex-direction: column; }
+.registrationPage .registrationForm label { margin: 0 0 7px; font-size: .78rem; font-weight: 700; }
+.registrationPage .registrationForm input, .registrationPage .registrationForm select { width: 100%; box-sizing: border-box; height: 43px; margin: 0 0 14px; padding: 0 13px; border: 1px solid var(--line); border-radius: 4px; background: #fbfcfd; font: inherit; outline: none; }
+.registrationPage .registrationForm input:focus, .registrationPage .registrationForm select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(237,106,77,.14); }
+.registrationPage .registrationForm button { height: 46px; margin-top: 5px; border: 0; border-radius: 4px; color: #fff; background: var(--accent); font: inherit; font-weight: 800; cursor: pointer; }
+.registrationPage .registrationForm button:hover { background: #d8553c; }
+.registrationPage .registrationForm button span { margin-left: 8px; font-size: 1.1rem; }
+@media (max-width: 814px) { .registrationPage .header { height: 64px; padding: 0 20px; } .registrationPage .right-section > span { display: none; } .registrationPage .main { min-height: calc(100dvh - 64px); flex-direction: column; } .registrationPage .displayPanel { flex: 0 0 220px; min-height: 220px; } .registrationPage .heroSection { left: 24px; bottom: 24px; } .registrationPage .heroSection h2 { font-size: clamp(2.2rem, 9vw, 3.4rem); } .registrationPage .registrationPanel { padding: 30px 20px 44px; } }
+@media (max-width: 400px) { .registrationPage .header { height: 58px; padding: 0 14px; } .registrationPage .left-section h1 { font-size: .95rem; } .registrationPage .brandMark { width: 26px; height: 26px; } .registrationPage .login { padding: 8px 12px; font-size: .76rem; } .registrationPage .main { min-height: calc(100dvh - 58px); } .registrationPage .displayPanel { flex-basis: 190px; min-height: 190px; } .registrationPage .heroSection { left: 18px; bottom: 18px; } .registrationPage .heroSection h2 { margin-bottom: 9px; font-size: 2.25rem; } .registrationPage .heroSection p:last-child { font-size: .8rem; } .registrationPage .registrationPanel { padding: 22px 14px 34px; } .registrationPage .registrationFormContainer { padding: 24px 20px; } }

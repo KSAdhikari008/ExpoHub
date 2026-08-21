@@ -62,7 +62,7 @@ function VisitorEventDetails({eventId}) {
 
   return (
   event && 
-    <div className={`${styles.eventCard} ${theme === 'light' ? styles.lightMode : ''}`}>
+    <div className={`${styles.eventCard} ${theme === 'light' ? styles.lightMod : ''}`}>
         <div className={styles.banner}>
           <img src={event.banner.url} alt={event.title} />
         </div>
