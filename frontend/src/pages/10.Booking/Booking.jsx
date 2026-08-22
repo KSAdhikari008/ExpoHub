@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import './Booking.css'
 
 
-function Booking() {
+function Booking({setIsBooked, setOverlay}) {
 
   // const [isExhibitor, setIsExhibitor] = useState();
   const {boothId} =  useParams();
@@ -26,11 +26,23 @@ function Booking() {
     checkRole();
 
   },[boothId,navigate]);
+
+  async function unbook(){
+    try{
+      await axios.patch(`/api/booths/removeBooking/${boothId}`);
+      setIsBooked?.(false);
+      setOverlay?.(false);
+    }catch(err){
+      console.log(err);
+    }
+  }
  
   return (
     <div className="overlay">
              <div className="booking-container">
                 <div className="registration-form">Some details to be filled or something.</div>
+                <button onClick={unbook}>unbook</button>
+                <button onClick={()=>{setOverlay(false)}}>exit</button>
               </div>  
     </div>
   );

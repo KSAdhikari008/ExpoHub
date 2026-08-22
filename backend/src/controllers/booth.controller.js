@@ -126,4 +126,30 @@ async function bookBooth(req,res){
 
 }
 
-export {getEventBooths, getBooth,createBooth, deleteBooth, bookBooth};
+async function removeBooking(req,res){
+    try{
+
+        const {boothId} = matchedData(req);
+        
+        const booth = await Booth.findOneAndUpdate({
+            _id: boothId,
+            status: "Booked"
+        },{
+            exhibitor: null,
+            status: "Available"
+        })
+    
+        
+        res.status(200).json({
+            messasge: "Booking removed successfully."
+        })
+
+    }catch(err){
+        res.status(400).json({
+            message: err,
+            error: err
+        })
+    }
+}
+
+export {getEventBooths, getBooth,createBooth, deleteBooth, bookBooth, removeBooking};
