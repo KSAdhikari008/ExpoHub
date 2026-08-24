@@ -4,40 +4,40 @@ import axios from 'axios';
 import { useIsUser } from '../context/UserHook';
 import { formatEventDate } from '../utils/formatDate';
 import { useTheme } from '../context/ThemeHook';
-// import Booking from '../pages/10.Booking/Booking';
+import Booking from '../pages/10.Booking/Booking';
 
  function ExhibitorEventDetails({eventId}) {
 
   const { theme } = useTheme();
   const [event, setEvent] = useState();
   const {isUser} = useIsUser();
-  // const [booths, setBooths] = useState();
-  // const [isBooked, setIsBooked] = useState(false);
-  // const [boothId, setBoothId] = useState();
-  // const [overlay, setOverlay] = useState(false);
+  const [booths, setBooths] = useState([]);
+  const [isBooked, setIsBooked] = useState(false);
+  const [selectedBooth, setSelectedBooth] = useState(null);
+  const [overlay, setOverlay] = useState(false);
 
 
 
   useEffect(()=>{
-  
     async function getEvent() {
       try{
-
-        // > Get Event.
         const response = await axios.get(`/api/events/${eventId}`);
-        setEvent(response.data.event); 
-        const boothRes = await axios.get(`/api/booths/${eventId}`);
-        const booth = boothRes.data.booths.find(booth => booth.exhibitor === isUser._id);
-        // console.log(boothRes)
-        // console.log(booth)
+        setEvent(response.data.event);
+
+        if (!isUser) return;
+
+        const eventBooths = (await axios.get(`/api/booths/${eventId}`)).data.booths;
+        setBooths(eventBooths);
+
+        const booth = eventBooths.find(booth =>
+          booth.exhibitor && String(booth.exhibitor) === String(isUser.id)
+        );
         if(booth){
-          // setIsBooked({booth: booth, id: booth._id});
-        }else{
-          // setBooths(boothRes.data.booths);
+          setIsBooked(booth);
+          setSelectedBooth(booth);
         }
       }catch(err){
-        if(err.response){          
-          // > Only alert if res comes from events api call.
+        if(err.response){
           if(err.response.data.message !== 'Registration not found'){
             alert(err.response.data.message);
           }
@@ -48,21 +48,24 @@ import { useTheme } from '../context/ThemeHook';
     }
 
     getEvent();
+  },[eventId, isUser]);
 
-      
-  },[eventId,isUser._id]);
- 
-// async function bookBooth(){
-//     try{ 
-//       console.log('booth');
-//     }catch(err){
-//       if(err.response){
-//         console.log(err.response.data.message);
-//       }else{
-//         console.log(err.message);
-//       }
-//     }
-//   }
+  async function bookBooth(){
+    if (!selectedBooth) return;
+
+    try{
+      const res = await axios.patch(`/api/booths/booking/${selectedBooth._id}`);
+      setSelectedBooth(res.data.booth);
+      setIsBooked(res.data.booth);
+      setOverlay(true);
+    }catch(err){
+      if(err.response){
+        console.log(err.response.data.message);
+      }else{
+        console.log(err.message);
+      }
+    }
+  }
 
    return (
   event &&
@@ -96,27 +99,31 @@ import { useTheme } from '../context/ThemeHook';
               <span>{formatEventDate(event.endDate,"dd MMM, yyyy")}</span>
             </div>
           </div>
-          
         </div>
+
+      {isBooked 
+        ? <button className={styles.booking} onClick={()=>{setSelectedBooth(isBooked); setOverlay(true)}}>booking details</button>
+        : <div className={styles.boothsContainer}>
+            <div className={styles.boothList}>
+              {booths.length > 0 ? booths.map(booth =>
+                <button
+                  className={`${styles.boothOption} ${selectedBooth?._id === booth._id ? styles.selectedBooth : ''}`}
+                  key={booth._id}
+                  onClick={()=>{setSelectedBooth(booth)}}
+                  disabled={booth.status !== 'Available'}
+                >
+                  <span>{booth.boothName}</span>
+                  <small>{booth.size} · {booth.status}</small>
+                </button>
+              ) : <p className={styles.emptyBooths}>No booths are available for this event.</p>}
+            </div>
+            <button className={styles.booking} onClick={bookBooth}>Book Booth</button>
+          </div>
+      }
+      {overlay && <Booking  setOverlay={setOverlay} setIsBooked={setIsBooked} booth={selectedBooth}/> }
     </div>
   );
  }
-
- {/* {!isBooked && 
-      <div className="booths">
-        {booths && booths.map(booth => (
-          <button className="booth" key={booth._id} 
-          onClick={()=>{setBoothId(booth._id)}}>
-                    {booth.boothName} {booth.size} {booth.status}
-          </button>
-          ))}
-      </div>} */}
-      {/* {isBooked 
-          ? <button className={styles.primaryBtn} onClick={()=>{setOverlay(true)}}>View Booking details</button> 
-          : <button className={styles.primaryBtn} onClick={bookBooth}>Book Booth</button> 
-      } */}
-  {/* {overlay && <Booking  setOverlay={setOverlay} setIsBooked={setIsBooked}/> } */}
-
  
  export default ExhibitorEventDetails;
 

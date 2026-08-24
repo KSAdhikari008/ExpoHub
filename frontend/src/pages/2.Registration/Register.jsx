@@ -17,7 +17,9 @@ function Register() {
     
     try{
       await axios.post('/api/auth/register',jsonData,);
-      setIsUser(true);
+      const user = await axios.get('/api/auth/me');
+      setIsUser(user.data);
+      console.log(user);
       navigate('/');
     }catch(err){
       //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.

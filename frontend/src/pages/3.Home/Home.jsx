@@ -12,8 +12,6 @@ function Home() {
   const [events, setEvents] = useState([]);
   // const [isUser, setIsUser] = useState(false);
 
-  // const navigate = useNavigate();
-
   useEffect(()=>{
   
     async function getEvents() {

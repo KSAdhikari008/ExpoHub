@@ -5,7 +5,7 @@ const UserContext = createContext();
 
 export function UserContextProvider({children}) {
     
-  const [isUser, setIsUser] = useState(false);    
+  const [isUser, setIsUser] = useState(null);    
 
   useEffect(()=>{
     
@@ -18,7 +18,7 @@ export function UserContextProvider({children}) {
       }catch(err){
         if(err.response){
             // if the error is not due to authentication, log it
-            if(err.response.data.message !== 'Authentication token is missing'){ 
+            if(err.response.data.message !== 'Authentication token missing'){ 
               console.log(err.response.data.message);
             }
         }else{

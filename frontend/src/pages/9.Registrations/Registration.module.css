@@ -1,171 +1,175 @@
-.overlay{
-    height: 100vh;
-    width: 100vw;
-    z-index: 1000; 
+.overlay {
+    min-height: 100vh;
+    width: 100%;
+    z-index: 1000;
     position: fixed;
-    top: 0; 
-    left: 0;
-    background-color: rgba(2, 2, 2, 0.600);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: black;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(8px);
 }
 
 .registration {
-    width: 50rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background-color: rgb(240, 255, 240);
+    width: min(100%, 620px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
     display: flex;
-    flex-flow: column nowrap;
-    gap: 10px;
+    flex-direction: column;
     align-items: center;
-    padding: 10px 20px;
+    gap: 24px;
+    padding: 34px;
     box-sizing: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.315);
-    border-radius: 20px;
-    box-shadow: 1px 1px 5px black;
     position: relative;
+    background: #f4fff8;
+    border: 1px solid #b7e4c7;
+    border-radius: 24px;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.3);
 }
 
-.cardHeading{
-    /* text-align: center; */
-    width: 92%;
-    margin: 0;
-    padding: 0;
-    color: rgb(2, 101, 2);
-    font-size: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* height: 100px; */
-    /* background-color: blue; */
-}
-
-.eventDetails{
-    height: 300px;
+.cardHeading {
     width: 100%;
-    background-color: rgb(199, 255, 199);
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
+    margin: 0;
+    padding-right: 32px;
     box-sizing: border-box;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.450);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.326);
+    color: #166534;
+    font-size: clamp(1.7rem, 4vw, 2.35rem);
+    line-height: 1.1;
 }
 
-.banner{
-    height: 90%;
-    width: 55%;
-    border-radius: 12px;
+.eventDetails {
+    min-height: 260px;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #dcfce7;
+    border: 1px solid #b7e4c7;
+    border-radius: 18px;
+}
+
+.banner {
+    min-height: 220px;
+    width: 46%;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.527);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.326);
+    border-radius: 14px;
 }
 
-.banner img{
+.banner img {
+    width: 100%;
     height: 100%;
-    width: 100%;
+    display: block;
     object-fit: cover;
-    object-position: center;
 }
 
-.details{
-    /* border: 1px solid grey; */
-    height: 90%;
-    width: 40%;
+.details {
+    width: 54%;
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    padding: 10px 10px;
-    box-sizing: border-box;
-
+    flex-direction: column;
+    gap: 14px;
+    padding: 4px 0;
 }
 
-.details .titleContainer{
-    text-align: center;
-    font-size: 23px;
-    /* height: 60px; */
-    /* line-height: 60px; */
+.titleContainer {
+    color: #14532d;
+    font-size: 1.25rem;
 }
 
-.title{
-    padding: 0;
+.title {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
 }
 
-.desc {
-    height: 50%;
-    line-height: 1.2;                  /* Set the element's height to 45% of its parent */
-    display: -webkit-box;         /* Enable the box layout required for line clamping */
-    -webkit-box-orient: vertical; /* Arrange the content vertically */
-    -webkit-line-clamp: 6;        /* Limit the text to a maximum of 6 lines */
-    line-clamp: 6;                /* Standard property for limiting text to 6 lines */
-    overflow: hidden;              /* Hide any text that exceeds the 6-line limit */
-    font-style: italic;
+.desc,
+.time,
+.status {
+    margin: 0;
+    color: #365314;
+    line-height: 1.45;
 }
 
-.details span{
-    font-weight: bold;
-    font-style: normal;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+.details span,
+.visitorDetails span {
+    color: #166534;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
-.visitorDetails{
-    border: 1px solid black;
-    height: 3rem;
+.visitorDetails {
     width: 100%;
+    min-height: 72px;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 14px 18px;
     box-sizing: border-box;
-    padding: 0px 27px;
-    border-radius: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.450);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.326);
-    background-color: rgb(199, 255, 199);
+    background: #dcfce7;
+    border: 1px solid #b7e4c7;
+    border-radius: 18px;
 }
 
-.visitorDetails div{
-    line-height: 3rem;
-    font-size: 18px;
-}
-.visitorDetails div span{
-    font-size: 18px;
-    font-weight:600;
-    font-family: Arial, Helvetica, sans-serif;
+.visitorDetails div {
+    color: #365314;
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
-.unregisterBtn{
-    background-color: rgb(183, 73, 73);
-    color: white;
-    padding: 7px 10px;
-    font-size: 17px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.358);
-    border: 1px solid rgba(0, 0, 0, 0.689);
-    letter-spacing: 1px;
-
-    &:hover{
-        cursor: pointer;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.679);
-    }
-}
-
-.overlayBtn{
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-}
-
-.overlayBtn:hover{
+.unregisterBtn {
+    align-self: flex-end;
+    margin: 0;
+    border: 0;
+    border-radius: 10px;
+    background: #15803d;
+    color: #fff;
+    padding: 11px 16px;
+    font: inherit;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 27px;
+}
+
+.unregisterBtn:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+.overlayBtn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    border: 0;
+    background: transparent;
+    color: #64748b;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media (max-width: 520px) {
+    .registration {
+        padding: 26px 20px;
+    }
+
+    .eventDetails {
+        flex-direction: column;
+    }
+
+    .banner,
+    .details {
+        width: 100%;
+    }
+
+    .banner {
+        min-height: 180px;
+    }
+
+    .unregisterBtn {
+        width: 100%;
+    }
 }

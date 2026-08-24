@@ -120,6 +120,94 @@
     transform: translateY(-1px);
 }
 
+.booking {
+    align-self: flex-start;
+    margin: 0 28px 28px;
+    border: 0;
+    border-radius: 10px;
+    background: #c2410c;
+    color: #fff;
+    padding: 12px 18px;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(194, 65, 12, 0.24);
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking:hover {
+    filter: brightness(0.94);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(194, 65, 12, 0.3);
+}
+
+.booking:focus-visible {
+    outline: 3px solid rgba(251, 191, 36, 0.75);
+    outline-offset: 3px;
+}
+
+.boothsContainer .booking {
+    margin: 0;
+}
+
+.boothsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 28px 28px;
+}
+
+.boothList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.boothOption {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-height: 74px;
+    padding: 14px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 14px;
+    background: rgba(148, 163, 184, 0.1);
+    color: #e2e8f0;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.lightMod .boothOption {
+    background: rgba(15, 23, 42, 0.04);
+    color: #0f172a;
+}
+
+.boothOption:hover:not(:disabled),
+.selectedBooth {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.16);
+}
+
+.boothOption small {
+    color: #94a3b8;
+    font-size: 0.78rem;
+}
+
+.boothOption:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.emptyBooths {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: #94a3b8;
+}
+
 @media (max-width: 640px) {
     .detailRows,
     .dateBlock {
@@ -132,5 +220,14 @@
 
     .banner {
         height: 260px;
+    }
+
+    .booking {
+        margin: 0 18px 22px;
+        width: calc(100% - 36px);
+    }
+
+    .boothsContainer {
+        padding: 0 18px 22px;
     }
 }

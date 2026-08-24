@@ -17,7 +17,9 @@ function Login() {
     
     try{
       await axios.post('/api/auth/login',jsonData);
-      setIsUser(true);
+      const user = await axios.get('/api/auth/me');
+      setIsUser(user.data);
+      console.log(user);
       navigate('/');
     }catch(err){
       //  a 4xx or 5xx status code res is treated as error by Axios.is accessed by err.response.

@@ -131,17 +131,25 @@ async function removeBooking(req,res){
 
         const {boothId} = matchedData(req);
         
-        const booth = await Booth.findOneAndUpdate({
+        const query = {
             _id: boothId,
-            status: "Booked"
-        },{
+            status: "Booked",
+            ...(req.user.role === "Admin" ? {} : { exhibitor: req.user.id })
+        };
+        const booth = await Booth.findOneAndUpdate(query,{
             exhibitor: null,
             status: "Available"
-        })
+        },{returnDocument: "after"})
     
+        if(!booth){
+            return res.status(400).json({
+                message: "Booth is not booked or does not exist."
+            })
+        }
         
         res.status(200).json({
-            messasge: "Booking removed successfully."
+            message: "Booking removed successfully.",
+            booth: booth
         })
 
     }catch(err){
